@@ -48,7 +48,6 @@ buildNumber.properties
 
 # IntelliJ project files
 .idea
-out
 gen
 ### Angular template
 ## Angular ##
