@@ -48,7 +48,6 @@ buildNumber.properties
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
 ### Angular template
@@ -84,4 +83,5 @@ e2e/*.map
 
 # System Files
 .DS_Store/
+
 
