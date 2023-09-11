@@ -84,3 +84,5 @@ e2e/*.map
 .DS_Store/
 
 
+.frontend.iml
+.App E-Commerce.iml
