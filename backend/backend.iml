@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
-  <component name="AdditionalModuleElements">
-    <content url="file://$MODULE_DIR$" dumb="true">
-      <excludeFolder url="file://$MODULE_DIR$/.idea" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/com/formation/backend/model/dto/out" />
-    </content>
-  </component>
-  <component name="FacetManager">
-    <facet type="jpa" name="JPA">
-      <configuration>
-        <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping>
-          <factory-entry name="entityManagerFactory" value="305f6248-2278-4325-8824-55c5d35815f0" />
-        </datasource-mapping>
-        <naming-strategy-map />
-      </configuration>
-    </facet>
-  </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="a4c96fdf-b9d0-4b92-9d42-9153453ce9c8" />
+    <option name="uniqueId" value="e7be032d-6731-4840-9b12-b6612482b73d" />
   </component>
 </module>
