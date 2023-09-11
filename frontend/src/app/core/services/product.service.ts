@@ -12,7 +12,22 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getProductList(): Observable<ProductShort[]> {
+  public searchProduct(
+    params: string
+  ): Observable<HttpResponse<ProductShort[]>> {
+    return this.httpClient
+      .get<ProductShort[]>(this.endpoint.base(), {
+        observe: 'response',
+        params: { searchTerm: params },
+      })
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  public getProductList(): Observable<ProductShort[]> {
     return this.httpClient
       .get<ProductShort[]>(this.endpoint.base(), { observe: 'response' })
       .pipe(
