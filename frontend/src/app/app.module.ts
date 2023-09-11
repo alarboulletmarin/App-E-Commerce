@@ -5,10 +5,29 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './core/services/product.service';
 import { SharedModule } from './shared/shared.module';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { PageNotFoundComponent } from './pages/pages-not-found/page-not-found.component';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, SharedModule],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    NavbarComponent,
+    PageNotFoundComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    FormsModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+  ],
   providers: [ProductService],
   exports: [SharedModule],
   bootstrap: [AppComponent],
