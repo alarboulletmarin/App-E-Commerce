@@ -2,10 +2,10 @@ package com.formation.backend.dao;
 
 
 import com.formation.backend.model.entity.Product;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(path = "products")
+@Hidden
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
 }

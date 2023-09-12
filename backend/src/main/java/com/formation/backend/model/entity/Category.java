@@ -2,6 +2,7 @@ package com.formation.backend.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Table(name = "category")
 @Getter
 @Setter
+@RestResource(exported = false)
 public class Category {
 
     @Id

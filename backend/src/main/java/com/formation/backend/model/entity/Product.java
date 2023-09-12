@@ -3,6 +3,7 @@ package com.formation.backend.model.entity;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name = "product")
 @Data
+@RestResource(exported = false)
 public class Product {
 
     @Id

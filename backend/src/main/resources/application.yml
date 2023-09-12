@@ -16,10 +16,15 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
+    open-in-view: off
 
   data:
     rest:
       base-path: /api
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   port: 8080
