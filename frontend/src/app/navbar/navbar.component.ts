@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../core/services/product.service';
 import { ProductShort } from '../core/models/product.model';
+import { TranslateService } from '@ngx-translate/core';
+import { APP_CONSTANTS } from '../app.constant';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +10,20 @@ import { ProductShort } from '../core/models/product.model';
   styleUrls: ['./navbar.component.sass'],
 })
 export class NavbarComponent implements OnInit {
-  isConnected: any;
-  searchTerm: string = '';
-  allProducts: ProductShort[] = [];
-  searchResults: ProductShort[] = [];
+  public faIcons = APP_CONSTANTS.faIcon;
+  public isConnected: any;
+  public searchTerm: string = '';
+  public allProducts: ProductShort[] = [];
+  public searchResults: ProductShort[] = [];
+  public showLanguages = false;
+  public languages = ['fr', 'en'];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private translateService: TranslateService
+  ) {
+    translateService.setDefaultLang(this.languages[0]);
+  }
 
   ngOnInit(): void {
     this.productService.getProductList().subscribe((products) => {
@@ -21,7 +31,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  onSearchChange(): void {
+  public onSearchChange(): void {
     if (this.searchTerm.length > 0) {
       this.searchResults = this.allProducts.filter((product) =>
         product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -29,5 +39,10 @@ export class NavbarComponent implements OnInit {
     } else {
       this.searchResults = [];
     }
+  }
+
+  public useLanguage(lang: string): void {
+    this.translateService.use(lang);
+    this.showLanguages = false;
   }
 }

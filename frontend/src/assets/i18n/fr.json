@@ -1,0 +1,23 @@
+{
+  "lang": {
+    "de": "Allemand",
+    "en": "Anglais",
+    "fr": "Français",
+    "it": "Italien"
+  },
+  "label": {
+    "admin": "Administrateur",
+    "product": "Produit",
+    "products": "Produits",
+    "all_products": "Voir tous les Produits",
+    "category": "Catégorie",
+    "categories": "Catégories",
+    "all_categories": "Voir tous les Catégories",
+    "all_results": "Voir l'ensemble des résultats",
+    "home": "Accueil",
+    "section": "Section",
+    "search": "Que recherchez vous ?",
+    "login": "Connexion",
+    "logout": "Déconnexion"
+  }
+}

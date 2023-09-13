@@ -1,14 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img
-        src="../../favicon.ico"
-        alt="Logo"
-        width="36"
-        height="36"
-        class="d-inline-block align-text-top"
-      />
-    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -21,9 +12,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-5 mb-lg-0">
+      <ul class="navbar-nav mb-5 mb-lg-0 nav-left">
+        <a class="navbar-brand" href="#">
+          <img
+            src="../../favicon.ico"
+            alt="Logo"
+            width="36"
+            height="36"
+            class="d-inline-block align-text-top"
+          />
+        </a>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="">Accueil</a>
+          <a class="nav-link" aria-current="page" href="">{{
+            "label.home" | translate
+          }}</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -33,16 +35,24 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Produits
+            {{ "label.products" | translate }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Section 1</a></li>
-            <li><a class="dropdown-item" href="">Section 2</a></li>
+            <li>
+              <a class="dropdown-item" href="">{{
+                "label.section" | translate
+              }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">{{
+                "label.section" | translate
+              }}</a>
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="/product"
-                >Voir tous les Produits</a
-              >
+              <a class="dropdown-item" href="/product">{{
+                "label.all_products" | translate
+              }}</a>
             </li>
           </ul>
         </li>
@@ -54,16 +64,24 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Catégories
+            {{ "label.categories" | translate }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Section 1</a></li>
-            <li><a class="dropdown-item" href="">Section 2</a></li>
+            <li>
+              <a class="dropdown-item" href="">{{
+                "label.section" | translate
+              }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="">{{
+                "label.section" | translate
+              }}</a>
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="/category"
-                >Voir toutes les Catégories</a
-              >
+              <a class="dropdown-item" href="/category">{{
+                "label.all_categories" | translate
+              }}</a>
             </li>
           </ul>
         </li>
@@ -75,7 +93,7 @@
           <input
             class="form-control me-2 input-search"
             type="search"
-            placeholder="Search"
+            placeholder="{{ 'label.search' | translate }}"
             aria-label="Search"
             name="searchTerm"
             [(ngModel)]="searchTerm"
@@ -98,19 +116,31 @@
               {{ product.name }}
             </li>
           </ul>
-          <a href="/path_to_all_results">Voir l'ensemble des résultats</a>
+          <a href="/product">{{ "label.all_results" | translate }}</a>
         </div>
       </div>
 
       <!-- Boutons de connexion à droite -->
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto nav-right">
+        <div class="icon-wrapper">
+          <fa-icon
+            class="icon"
+            (click)="showLanguages = !showLanguages"
+            [icon]="faIcons.language"
+          ></fa-icon>
+          <div *ngIf="showLanguages" class="languages-list">
+            <div *ngFor="let lang of languages" (click)="useLanguage(lang)">
+              <button class="btn-lang">{{ "lang." + lang | translate }}</button>
+            </div>
+          </div>
+        </div>
         <!-- Si non connecté -->
         <li class="nav-item" *ngIf="!isConnected">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" href="#">{{ "label.login" | translate }}</a>
         </li>
         <!-- Si connecté -->
         <li class="nav-item" *ngIf="isConnected">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="#">{{ "label.logout" | translate }}</a>
         </li>
       </ul>
     </div>
