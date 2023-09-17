@@ -1,8 +1,7 @@
 @import './../../assets/styles/_themes.sass'
 
 .navbar
-  background-color: var(--background-color)
-  color: var(--text-color)
+  border-bottom: 1px solid var(--quinary-color)
 
   #navbarSupportedContent
     justify-content: center
@@ -12,15 +11,50 @@
       display: flex
       align-items: center
       .nav-item
-        width: 6em
         display: flex
         justify-content: center
+        width: 8em
+
+        .nav-link
+          color: var(--text-color)
+          font-size: 1.2em
+          font-weight: bold
+
+          &:hover
+            color: var(--tertiary-color)
+
+          &:focus
+            color: var(--tertiary-color)
+
+        .dropdown-menu
+          background-color: var(--background-color)
+
+          .dropdown-item
+            color: var(--text-color)
+
+            &:hover
+              background-color: var(--secondary-color)
+              color: var(--senary-color)
+
+            &:focus
+              background-color: var(--secondary-color)
+              color: var(--senary-color)
+
+          .dropdown-divider
+            border-top-color: var(--secondary-color)
 
     .search-container
       position: relative
       .search-bar
         .input-search
+          border: none
+          background-color: var(--background-color-search)
+          color: var(--text-color)
           width: 25em
+
+          &::placeholder
+            color: var(--text-color)
+
         .btn-search-submit
           display: flex
       .search-dropdown
@@ -32,7 +66,7 @@
         padding: 0.5rem 0
         margin: 0.125rem 0 0
         font-size: 1rem
-        color: #212529
+        color: var(--text-color)
         text-align: left
         background-color: var(--background-color)
         background-clip: padding-box
@@ -45,20 +79,19 @@
       margin-left: 12em
       display: flex
       .nav-item
-        width: 6em
+        width: 3em
         display: flex
         justify-content: center
+        color: var(--text-color)
       .icon-wrapper
-        position: relative
-        display: flex
-        align-items: center
-        margin-right: 1em
+        .icon
+          color: var(--text-color)
         .languages-list
           position: absolute
-          top: 100%
+          top: 75%
           .btn-lang
-            background-color: #ececec71
-            color: #000000
+            background-color: var(--secondary-color)
+            color: var(--text-color)
             height: 2em
             width: 5em
             margin-top: 3px
@@ -68,7 +101,7 @@
             cursor: pointer
             transition: background-color 0.3s
             &:hover
-              background-color: #9999994b
+              background-color: var(--tertiary-color)
             &:focus
               outline: none
-              box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5) // Ajoute une lueur bleue autour du bouton
+              box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5)

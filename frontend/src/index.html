@@ -25,7 +25,22 @@
       rel="stylesheet"
     />
   </head>
+
   <body class="light-theme">
     <app-root></app-root>
   </body>
 </html>
+
+<script>
+  (function () {
+    let savedTheme = localStorage.getItem("theme");
+    let savedLang = localStorage.getItem("selectedLanguage");
+    if (savedTheme) {
+      document.body.classList.remove("light-theme");
+      document.body.classList.add(savedTheme);
+    }
+    if (savedLang) {
+      document.documentElement.lang = savedLang;
+    }
+  })();
+</script>
