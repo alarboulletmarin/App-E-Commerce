@@ -2,7 +2,9 @@ import {
   faCube,
   faGlobe,
   faHome,
+  faMoon,
   faShieldAlt,
+  faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
 
@@ -13,6 +15,8 @@ export const APP_CONSTANTS = {
     home: faHome,
     item: faCube,
     language: faGlobe,
+    dark_theme: faMoon,
+    light_theme: faSun,
   },
   endpoints: {
     product: {

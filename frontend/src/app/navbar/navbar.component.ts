@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   public searchResults: ProductShort[] = [];
   public showLanguages = false;
   public languages = ['fr', 'en'];
+  public faIconTheme = this.faIcons.dark_theme;
 
   constructor(
     private productService: ProductService,
@@ -44,5 +45,19 @@ export class NavbarComponent implements OnInit {
   public useLanguage(lang: string): void {
     this.translateService.use(lang);
     this.showLanguages = false;
+  }
+
+  toggleTheme() {
+    console.log('toggleTheme');
+    const body = document.body;
+    if (body.classList.contains('dark-theme')) {
+      body.classList.remove('dark-theme');
+      body.classList.add('light-theme');
+      this.faIconTheme = this.faIcons.dark_theme;
+    } else {
+      body.classList.remove('light-theme');
+      body.classList.add('dark-theme');
+      this.faIconTheme = this.faIcons.light_theme;
+    }
   }
 }

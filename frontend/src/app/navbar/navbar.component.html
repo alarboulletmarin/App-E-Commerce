@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <button
       class="navbar-toggler"
@@ -133,6 +133,14 @@
               <button class="btn-lang">{{ "lang." + lang | translate }}</button>
             </div>
           </div>
+        </div>
+        <!-- light/dark theme -->
+        <div class="icon-wrapper">
+          <fa-icon
+            class="icon"
+            (click)="toggleTheme()"
+            [icon]="faIconTheme"
+          ></fa-icon>
         </div>
         <!-- Si non connecté -->
         <li class="nav-item" *ngIf="!isConnected">
