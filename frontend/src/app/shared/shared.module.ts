@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductCardComponent } from './components/product/product-card/product-card.component';
 
-const COMPONENTS = [ProductCardComponent];
+const COMPONENTS: any = [];
 const MODULES = [CommonModule];
 @NgModule({
   declarations: [COMPONENTS],

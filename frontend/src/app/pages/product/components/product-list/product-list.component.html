@@ -1,10 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div
-      *ngFor="let product of products"
-      class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12"
-    >
-      <app-product-card [product]="product"></app-product-card>
-    </div>
-  </div>
+<div class="container product-list">
+  <!-- <div class="product-list__title">Products</div> -->
+
+  <table class="product-list__table">
+    <tbody>
+      <ng-container *ngFor="let product of products">
+        <tr class="product-list__row">
+          <td>
+            <img
+              [src]="product.imageUrl"
+              class="card-img-top"
+              alt="{{ product.name }}"
+            />
+          </td>
+          <td>
+            <a
+              class="product-list__link"
+              [routerLink]="['/products', product.id]"
+            >
+              {{ product.name }}
+            </a>
+          </td>
+          <td>{{ product.unitPrice | currency }}</td>
+          <td>{{ product.category.name }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
 </div>
