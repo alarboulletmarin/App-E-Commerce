@@ -20,6 +20,7 @@ public interface ProductMapper {
 
     CategoryDtoOut categoryToCategoryDtoOut(Category category);
 
+    @Mapping(source = "category", target = "category")
     ProductDtoOutShort entityToDtoOutShort(Product product);
 
     @Mapping(target = "category", expression = "java(findCategory(productDtoIn.getCategoryId(), categoryRepository))")

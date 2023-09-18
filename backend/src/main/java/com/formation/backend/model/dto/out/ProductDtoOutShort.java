@@ -12,4 +12,5 @@ public class ProductDtoOutShort {
     private String name;
     private double unitPrice;
     private String imageUrl;
+    private CategoryDtoOut category;
 }

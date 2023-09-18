@@ -1,5 +1,8 @@
+import { Category } from './category.model';
+
 export class Product {
   constructor(
+    public id: number,
     public code: string,
     public name: string,
     public description: string,
@@ -14,9 +17,11 @@ export class Product {
 
 export class ProductShort {
   constructor(
+    public id: number,
     public code: string,
     public name: string,
     public unitPrice: number,
-    public imageUrl: string
+    public imageUrl: string,
+    public category: Category
   ) {}
 }
