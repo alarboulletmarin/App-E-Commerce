@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-5 mb-lg-0 nav-left">
         <li>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" [routerLink]="['/']">
             <img
               alt="Logo"
               class="d-inline-block align-text-top"
@@ -25,14 +25,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="">{{
-            "label.home" | translate
-          }}</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['/']">
+            {{ "label.home" | translate }}
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
-            href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -41,18 +40,18 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="">{{
+              <a class="dropdown-item" [routerLink]="['/']">{{
                 "label.section" | translate
               }}</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">{{
+              <a class="dropdown-item" [routerLink]="['/']">{{
                 "label.section" | translate
               }}</a>
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="/product">{{
+              <a class="dropdown-item" [routerLink]="['/product']">{{
                 "label.all_products" | translate
               }}</a>
             </li>
@@ -61,7 +60,6 @@
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
-            href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -70,18 +68,18 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="">{{
+              <a class="dropdown-item" [routerLink]="['/']">{{
                 "label.section" | translate
               }}</a>
             </li>
             <li>
-              <a class="dropdown-item" href="">{{
+              <a class="dropdown-item" [routerLink]="['/']">{{
                 "label.section" | translate
               }}</a>
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="/category">{{
+              <a class="dropdown-item" [routerLink]="['/category']">{{
                 "label.all_categories" | translate
               }}</a>
             </li>
@@ -118,7 +116,9 @@
               {{ product.name }}
             </li>
           </ul>
-          <a href="/product">{{ "label.all_results" | translate }}</a>
+          <a [routerLink]="['/product']">{{
+            "label.all_results" | translate
+          }}</a>
         </div>
       </div>
 
