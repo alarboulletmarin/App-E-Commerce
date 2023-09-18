@@ -1,5 +1,13 @@
-import {faCube, faGlobe, faHome, faMoon, faShieldAlt, faSun, faUser,} from '@fortawesome/free-solid-svg-icons';
-import {environment} from 'src/environments/environment';
+import {
+  faCube,
+  faGlobe,
+  faHome,
+  faMoon,
+  faShieldAlt,
+  faSun,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { environment } from 'src/environments/environment';
 
 export const APP_CONSTANTS = {
   colors: {},
@@ -17,9 +25,14 @@ export const APP_CONSTANTS = {
       base: (id?: string) =>
         `${environment.apiURL}/api/products${id ? `/${id}` : ''}`,
     },
+    category: {
+      base: (id?: string) =>
+        `${environment.apiURL}/api/categories${id ? `/${id}` : ''}`,
+    },
   },
   routerLinks: {
     home: '',
     product: 'product',
+    category: 'category',
   },
 };

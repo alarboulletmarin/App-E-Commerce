@@ -18,7 +18,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/product/product.module').then((m) => m.ProductModule),
   },
-
+  // CATEGORY PAGE
+  {
+    path: APP_CONSTANTS.routerLinks.category,
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./pages/category/category.module').then((m) => m.CategoryModule),
+  },
   // ERROR PAGE
   { path: '**', component: PageNotFoundComponent },
 ];
