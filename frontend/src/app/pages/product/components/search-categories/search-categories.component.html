@@ -1,0 +1,17 @@
+<div class="search-categories">
+  <div class="search-categories__title">
+    <h1>{{ "label.categories" | translate }}</h1>
+  </div>
+  <div class="search-categories__list">
+    <ul class="search-categories__item" *ngFor="let category of categories">
+      <li>
+        <input
+          type="checkbox"
+          [value]="category.id"
+          (change)="onSelectCategory($event, category.id)"
+        />
+        {{ category.name }}
+      </li>
+    </ul>
+  </div>
+</div>

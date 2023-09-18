@@ -1,3 +1,6 @@
-<p>product-page works!</p>
-
-<app-product-list></app-product-list>
+<div class="container product-page">
+  <app-search-categories
+    (categorySelected)="productListComponent.onCategorySelected($event)"
+  ></app-search-categories>
+  <app-product-list #productListComponent></app-product-list>
+</div>
