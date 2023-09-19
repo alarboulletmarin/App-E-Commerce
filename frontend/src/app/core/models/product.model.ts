@@ -20,6 +20,7 @@ export class ProductShort {
     public id: number,
     public code: string,
     public name: string,
+    public description: string,
     public unitPrice: number,
     public imageUrl: string,
     public category: Category

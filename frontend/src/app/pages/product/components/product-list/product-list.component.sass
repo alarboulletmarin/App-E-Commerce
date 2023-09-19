@@ -1,37 +1,19 @@
 @import './../../../../../assets/styles/_themes.sass'
 
 .container.product-list
-  width: 100%
-  margin: 1em auto
-  padding: 1em
-  box-shadow: 0px 0px 10px 2px var(--tertiary-color)
-
-  .product-list__title
-    font-size: 1.5em
-    margin-bottom: 20px
-    text-align: center
-    color: var(--text-color)
-    font-weight: bold
-
-  .product-list__table
-    width: 100%
-    border-collapse: collapse
-
-    tr
-      border-bottom: 1px solid var(--tertiary-color)
-      margin: 1em auto
-
-    th, td
-      padding: 1.5em
-      text-align: center
-
-    img
-      width: 25em
-      height: 17em
-
-    .product-list__link
-      text-decoration: none
-      color: var(--text-color)
-
-      &:hover
-        text-decoration: underline
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  .product-card
+    width: 30%
+    margin: 1em
+    height: 100%
+    &:hover
+      box-shadow: 0px 0px 10px 2px var(--tertiary-color)
+      background-color: var(--secondary-color)
+  @media (max-width: 768px)
+    .card
+      width: 45%
+  @media (max-width: 576px)
+    .card
+      width: 100%

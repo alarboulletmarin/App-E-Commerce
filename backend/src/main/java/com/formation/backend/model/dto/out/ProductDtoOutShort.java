@@ -10,6 +10,7 @@ public class ProductDtoOutShort {
     private int id;
     private String code;
     private String name;
+    private String description;
     private double unitPrice;
     private String imageUrl;
     private CategoryDtoOut category;

@@ -1,8 +1,7 @@
-<div class="container product-list">
-  <!-- <div class="product-list__title">Products</div> -->
+<!-- <div class="container product-list">
 
   <table class="product-list__table">
-    <tbody>
+    <tbody class="product-list__body">
       <ng-container *ngFor="let product of products">
         <tr class="product-list__row">
           <td>
@@ -26,4 +25,20 @@
       </ng-container>
     </tbody>
   </table>
+</div> -->
+
+<div class="container product-list">
+  <div *ngFor="let product of products" class="product-card">
+    <img
+      [src]="product.imageUrl"
+      class="card-img-top"
+      alt="{{ product.name }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">Price: {{ product.unitPrice }}</p>
+      <p class="card-text">{{ product.description }}</p>
+      <!-- etc -->
+    </div>
+  </div>
 </div>
