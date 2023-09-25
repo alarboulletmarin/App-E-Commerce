@@ -64,6 +64,7 @@ public class ProductService {
         }
         Product product = productMapper.dtoInToEntity(productDtoIn, categoryRepository);
         product.setId(id);
+        product.setDateCreated(productRepository.findById(id).get().getDateCreated());
         Product updatedProduct = productRepository.save(product);
         return productMapper.entityToDtoOut(updatedProduct);
     }

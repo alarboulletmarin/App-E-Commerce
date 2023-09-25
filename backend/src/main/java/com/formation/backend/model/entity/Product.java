@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -34,7 +33,7 @@ public class Product {
     private String description;
 
     @Column(name = "unit_price")
-    private BigDecimal unitPrice;
+    private double unitPrice;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -45,7 +44,7 @@ public class Product {
     @Column(name = "units_in_stock")
     private int unitsInStock;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", updatable = false)
     @CreationTimestamp
     private Date dateCreated;
 
