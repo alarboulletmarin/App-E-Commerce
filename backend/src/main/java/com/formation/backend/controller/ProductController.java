@@ -11,10 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -29,9 +31,10 @@ public class ProductController {
 
     @PostMapping
     @Operation(summary = "Create a new product", tags = {"Products"})
-    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Product created", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductDtoIn.class)))}))
+    @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Product created", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductDtoIn.class)))}))
     public ResponseEntity<ProductDtoOut> createProduct(@Valid @RequestBody ProductDtoIn productDtoIn) {
-        return ResponseEntity.ok(productService.createProduct(productDtoIn));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDtoIn));
+
     }
 
     @GetMapping
@@ -40,7 +43,7 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "List of products", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductDtoOutShort.class)))})
     })
     public ResponseEntity<List<ProductDtoOutShort>> getAllProducts() {
-        return ResponseEntity.ok(productService.getProducts());
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getProducts());
     }
 
     @GetMapping("/{id}")
@@ -50,15 +53,16 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Product not found", content = @Content)
     })
     public ResponseEntity<ProductDtoOut> getProduct(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.getProduct(id));
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getProduct(id));
     }
 
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a product by its id", tags = {"Products"})
     @ApiResponse(responseCode = "200", description = "Product updated", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ProductDtoOut.class))})
-    public ResponseEntity<ProductDtoOut> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDtoIn productDtoIn) {
-        return ResponseEntity.ok(productService.updateProduct(id, productDtoIn));
+    public ResponseEntity<ProductDtoOut> updateProduct(@NotNull @PathVariable Long id, @Valid @RequestBody ProductDtoIn productDtoIn) {
+        return ResponseEntity.status(HttpStatus.OK).body(productService.updateProduct(id, productDtoIn));
+
     }
 
     @DeleteMapping("/{id}")
@@ -66,7 +70,7 @@ public class ProductController {
     @ApiResponse(responseCode = "204", description = "Product deleted")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
