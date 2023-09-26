@@ -13,13 +13,5 @@ public class RestConfig implements RepositoryRestConfigurer {
         cors.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
-
-        /*HttpMethod[] theUnsupportedActions = {HttpMethod.DELETE, HttpMethod.POST, HttpMethod.PUT};*/
-
-        // Disable HTTP methods for Product: PATCH, POST, PUT, DELETE
-       /* config.getExposureConfiguration()
-                .forDomainType(Product.class)
-                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
-                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions));*/
     }
 }

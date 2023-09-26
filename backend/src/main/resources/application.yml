@@ -22,9 +22,14 @@ spring:
     rest:
       base-path: /api
 
+  security:
+    jwt:
+      secret-key: H#hs{9Yi#@up8$#)9^68(c60_
+      token-validity: 86400000 # 1 day in milliseconds
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
 
 server:
-  port: 8080 
+  port: 8080
