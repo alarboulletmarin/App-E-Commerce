@@ -1,46 +1,34 @@
 package com.formation.backend.model.entity;
 
-import lombok.Getter;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-@Getter
 @Entity
 @Table(name = "users")
+@Data
+@RestResource(exported = false)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @Column(name = "date_created", updatable = false)
+    @CreationTimestamp
+    private Date dateCreated;
 
-    // getters, setters, etc.
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

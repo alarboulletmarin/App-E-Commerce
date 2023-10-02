@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 /**
  * This class implements the UserDetailsService interface.
@@ -55,15 +55,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
     }
 
-    /**
-     * This method is used by Spring Security to get the user's authorities.
-     *
-     * @param user the user whose authorities are required.
-     * @return a collection of authorities.
-     */
+
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-        return user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-                .collect(Collectors.toList());
+        // Convert the role name to a SimpleGrantedAuthority and return it inside a collection
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName().toUpperCase()));
     }
+
+
 }

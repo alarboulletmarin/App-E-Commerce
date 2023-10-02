@@ -1,9 +1,9 @@
 package com.formation.backend.controller;
 
 
+import com.formation.backend.model.dto.in.UserDtoIn;
+import com.formation.backend.model.dto.out.UserDtoOut;
 import com.formation.backend.model.entity.LoginRequest;
-import com.formation.backend.model.entity.RegisterRequest;
-import com.formation.backend.model.entity.User;
 import com.formation.backend.service.UserService;
 import com.formation.backend.service.security.AuthService;
 import com.formation.backend.service.security.CookieService;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * AuthController class is used to handle the authentication requests
@@ -54,14 +55,8 @@ public class AuthController {
      */
     @PostMapping("/register")
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "User registered"))
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        try {
-            User user = userService.createUser(request.getUsername(), request.getPassword(), request.getRoleName());
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            e.printStackTrace();  // Ceci imprimera l'exception et sa trace dans la console.
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<UserDtoOut> register(@Valid @RequestBody UserDtoIn userDtoIn) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDtoIn));
     }
 
     /**
@@ -81,6 +76,7 @@ public class AuthController {
 
             return ResponseEntity.ok().headers(header).build();
         } catch (Exception e) {
+            System.out.println("Erreur lors de l'authentification: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
