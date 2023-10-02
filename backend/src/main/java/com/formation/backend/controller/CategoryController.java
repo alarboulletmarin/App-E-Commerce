@@ -24,28 +24,28 @@ public class CategoryController {
 
     @PostMapping
     @Operation(summary = "Create a new category", tags = {"Categories"})
-    @ApiResponses(value = @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Category created"))
+    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category created"))
     public ResponseEntity<CategoryDtoOut> createCategory(@Valid @RequestBody CategoryDtoOut categoryDtoOut) {
         return ResponseEntity.ok(categoryService.createCategory(categoryDtoOut));
     }
 
     @GetMapping
     @Operation(summary = "Retrieve all categories", tags = {"Categories"})
-    @ApiResponses(value = @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "List of categories"))
+    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "List of categories"))
     public ResponseEntity<List<CategoryDtoOut>> getCategories() {
         return ResponseEntity.ok(categoryService.getCategories());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a category by its id", tags = {"Categories"})
-    @ApiResponses(value = @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Category found"))
+    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category found"))
     public ResponseEntity<CategoryDtoOut> getCategory(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.getCategory(id));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a category by its id", tags = {"Categories"})
-    @ApiResponses(value = @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Category updated"))
+    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category updated"))
     public ResponseEntity<CategoryDtoOut> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDtoOut categoryDtoOut) {
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDtoOut));
     }
