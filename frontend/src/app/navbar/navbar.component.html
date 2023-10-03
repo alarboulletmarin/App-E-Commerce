@@ -152,23 +152,43 @@
         </li>
 
         <!-- Si non connecté -->
-        <li class="nav-item" *ngIf="!isConnected">
+        <li class="nav-item-no-connected" *ngIf="!isConnected">
           <div>
-            <fa-icon
-              (click)="isConnected = !isConnected"
-              [icon]="faIcons.user"
-              class="icon"
-            ></fa-icon>
+            <button>
+              <a class="nav-link" [routerLink]="['/signin']">{{
+                "label.signin" | translate
+              }}</a>
+            </button>
+            <button>
+              <a class="nav-link" [routerLink]="['/register']">{{
+                "label.register" | translate
+              }}</a>
+            </button>
           </div>
         </li>
         <!-- Si connecté -->
-        <li class="nav-item" *ngIf="isConnected">
+        <li class="nav-item-connected" *ngIf="isConnected">
           <div>
-            <fa-icon
-              (click)="isConnected = !isConnected"
-              [icon]="faIcons.user"
-              class="icon"
-            ></fa-icon>
+            <button>
+              <a class="nav-link" [routerLink]="['/profile']">{{
+                "label.profile" | translate
+              }}</a>
+            </button>
+            <button>
+              <a class="nav-link" [routerLink]="['/cart']">{{
+                "label.cart" | translate
+              }}</a>
+            </button>
+            <button>
+              <a class="nav-link" [routerLink]="['/orders']">{{
+                "label.orders" | translate
+              }}</a>
+            </button>
+            <button>
+              <a class="nav-link" (click)="logout()">{{
+                "label.logout" | translate
+              }}</a>
+            </button>
           </div>
         </li>
       </ul>

@@ -23,9 +23,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private translateService: TranslateService
-  ) {
-    // translateService.setDefaultLang(this.languages[0]);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.productService.getProductList().subscribe((products) => {
@@ -70,7 +68,7 @@ export class NavbarComponent implements OnInit {
     this.showLanguages = false;
   }
 
-  toggleTheme() {
+  public toggleTheme() {
     const body = document.body;
     if (body.classList.contains('dark-theme')) {
       body.classList.remove('dark-theme');

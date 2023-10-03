@@ -79,6 +79,7 @@
     .nav-right
       margin-left: 12em
       display: flex
+      align-items: center
       .nav-item
         width: 3em
         display: flex
@@ -90,7 +91,7 @@
         .languages-list
           position: absolute
           top: 75%
-          right: 17%
+          right: 21.4%
           .btn-lang
             background-color: var(--secondary-color)
             color: var(--text-color)
@@ -107,3 +108,23 @@
             &:focus
               outline: none
               box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5)
+      .nav-item-no-connected
+        width: 15em
+        color: var(--text-color)
+        div
+          display: flex
+          align-items: center
+          button
+            width: 10em
+            margin: 0.5em
+            border-radius: 0.5em
+            cursor: pointer
+            transition: background-color 0.3s
+            background: var(--quinary-color)
+            &:hover
+              background-color: var(--primary-color)
+            a
+              color: var(--primary-color)
+              text-decoration: none
+              &:hover
+                color: var(--quinary-color)
