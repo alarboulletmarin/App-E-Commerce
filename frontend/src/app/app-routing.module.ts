@@ -25,6 +25,23 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/category/category.module').then((m) => m.CategoryModule),
   },
+  // AUTH PAGE
+  // SIGNIN
+  {
+    path: APP_CONSTANTS.routerLinks.signin,
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./pages/auth/signin/signin.module').then((m) => m.SigninModule),
+  },
+  // REGISTER
+  {
+    path: APP_CONSTANTS.routerLinks.register,
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./pages/auth/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
   // ERROR PAGE
   { path: '**', component: PageNotFoundComponent },
 ];

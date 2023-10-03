@@ -34,5 +34,7 @@ export const APP_CONSTANTS = {
     home: '',
     product: 'product',
     category: 'category',
+    signin: 'signin',
+    register: 'register',
   },
 };
