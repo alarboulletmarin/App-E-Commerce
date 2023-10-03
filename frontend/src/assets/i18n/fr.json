@@ -17,7 +17,8 @@
     "home": "Accueil",
     "section": "Section",
     "search": "Que recherchez vous ?",
-    "login": "Connexion",
+    "signin": "Connexion",
+    "register": "Inscription",
     "logout": "Déconnexion"
   }
 }

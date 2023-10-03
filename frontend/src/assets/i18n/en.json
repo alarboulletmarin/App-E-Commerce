@@ -17,7 +17,8 @@
     "home": "Home",
     "section": "Section",
     "search": "What are you looking for?",
-    "login": "Login",
+    "signin": "Sign in",
+    "register": "Register",
     "logout": "Logout"
   }
 }
