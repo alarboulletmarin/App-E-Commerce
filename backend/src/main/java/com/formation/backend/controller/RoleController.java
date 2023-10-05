@@ -24,6 +24,12 @@ public class RoleController {
         this.roleService = roleService;
     }
 
+    /**
+     * Create a new role
+     *
+     * @param roleDtoOut the role to create
+     * @return the created role
+     */
     @PostMapping
     @Operation(summary = "Create a new role", tags = {"Role"})
     @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Role created"))
@@ -31,6 +37,11 @@ public class RoleController {
         return ResponseEntity.ok(roleService.createRole(roleDtoOut));
     }
 
+    /**
+     * Retrieve all roles
+     *
+     * @return the list of roles
+     */
     @GetMapping
     @Operation(summary = "Retrieve all roles", tags = {"Role"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "List of roles"))
@@ -38,6 +49,12 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getRoles());
     }
 
+    /**
+     * Retrieve a role by its id
+     *
+     * @param id the id of the role to retrieve
+     * @return the role
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a role by its id", tags = {"Role"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Role found"))
@@ -45,6 +62,13 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getRole(id));
     }
 
+    /**
+     * Update a role by its id
+     *
+     * @param id         the id of the role to update
+     * @param roleDtoOut the role to update
+     * @return the updated role
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a role by its id", tags = {"Role"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Role updated"))
@@ -52,6 +76,12 @@ public class RoleController {
         return ResponseEntity.ok(roleService.updateRole(id, roleDtoOut));
     }
 
+    /**
+     * Delete a role by its id
+     *
+     * @param id the id of the role to delete
+     * @return nothing
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a role by its id", tags = {"Role"})
     @ApiResponses(value = @ApiResponse(responseCode = "204", description = "Role deleted"))

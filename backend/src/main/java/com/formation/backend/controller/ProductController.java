@@ -29,6 +29,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+    /**
+     * Create a new product
+     *
+     * @param productDtoIn ProductDtoIn object
+     * @return ResponseEntity object
+     */
     @PostMapping
     @Operation(summary = "Create a new product", tags = {"Products"})
     @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Product created", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ProductDtoIn.class)))}))
@@ -37,6 +43,11 @@ public class ProductController {
 
     }
 
+    /**
+     * Retrieve all products
+     *
+     * @return ResponseEntity object
+     */
     @GetMapping
     @Operation(summary = "Retrieve all products", tags = {"Products"})
     @ApiResponses(value = {
@@ -46,6 +57,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getProducts());
     }
 
+    /**
+     * Retrieve a product by its id
+     *
+     * @param id Product id
+     * @return ResponseEntity object
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a product by its id", tags = {"Products"})
     @ApiResponses(value = {
@@ -57,6 +74,13 @@ public class ProductController {
     }
 
 
+    /**
+     * Update a product by its id
+     *
+     * @param id           Product id
+     * @param productDtoIn ProductDtoIn object
+     * @return ResponseEntity object
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a product by its id", tags = {"Products"})
     @ApiResponse(responseCode = "200", description = "Product updated", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ProductDtoOut.class))})
@@ -65,6 +89,12 @@ public class ProductController {
 
     }
 
+    /**
+     * Delete a product by its id
+     *
+     * @param id Product id
+     * @return ResponseEntity object
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a product by its id", tags = {"Products"})
     @ApiResponse(responseCode = "204", description = "Product deleted")

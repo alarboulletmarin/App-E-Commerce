@@ -22,6 +22,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    /**
+     * Create a new category
+     *
+     * @param categoryDtoOut CategoryDtoOut object
+     * @return ResponseEntity object
+     */
     @PostMapping
     @Operation(summary = "Create a new category", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category created"))
@@ -29,6 +35,11 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.createCategory(categoryDtoOut));
     }
 
+    /**
+     * Retrieve all categories
+     *
+     * @return ResponseEntity object
+     */
     @GetMapping
     @Operation(summary = "Retrieve all categories", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "List of categories"))
@@ -36,6 +47,12 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getCategories());
     }
 
+    /**
+     * Retrieve a category by its id
+     *
+     * @param id Category id
+     * @return ResponseEntity object
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category found"))
@@ -43,6 +60,13 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getCategory(id));
     }
 
+    /**
+     * Update a category by its id
+     *
+     * @param id Category id
+     * @param categoryDtoOut CategoryDtoOut object
+     * @return ResponseEntity object
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category updated"))
@@ -50,7 +74,12 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.updateCategory(id, categoryDtoOut));
     }
 
-
+    /**
+     * Delete a category by its id
+     *
+     * @param id Category id
+     * @return ResponseEntity object
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "204", description = "Category deleted"))

@@ -48,9 +48,9 @@ public class AuthController {
     }
 
     /**
-     * This method is used to register a new user
+     * Register a new user
      *
-     * @param request RegisterRequest object
+     * @param userDtoIn UserDtoIn object
      * @return ResponseEntity object
      */
     @PostMapping("/register")
@@ -60,7 +60,7 @@ public class AuthController {
     }
 
     /**
-     * This method is used to login a user
+     * Login a user
      *
      * @param request LoginRequest object
      * @return ResponseEntity object
@@ -82,7 +82,7 @@ public class AuthController {
     }
 
     /**
-     * This method is used to logout a user
+     * Logout a user
      *
      * @param response HttpServletResponse object
      * @return ResponseEntity object

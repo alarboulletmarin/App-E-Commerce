@@ -10,6 +10,4 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
-
-    // TODO: 06/09/2023 - FAIRE
 }

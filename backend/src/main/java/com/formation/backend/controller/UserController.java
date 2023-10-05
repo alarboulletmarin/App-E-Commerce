@@ -28,6 +28,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Create a new user
+     *
+     * @param userDtoIn the user to create
+     * @return the created user
+     */
     @PostMapping
     @Operation(summary = "Create a new user", tags = {"Users"})
     @ApiResponses(value = @ApiResponse(responseCode = "201", description = "User created", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserDtoIn.class)))}))
@@ -35,6 +41,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDtoIn));
     }
 
+    /**
+     * Retrieve a user by its id
+     *
+     * @param id the id of the user to retrieve
+     * @return the user
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a user by its id", tags = {"Users"})
     @ApiResponses(value = {
@@ -45,6 +57,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(id));
     }
 
+    /**
+     * Retrieve all users
+     *
+     * @return the list of users
+     */
     @GetMapping
     @Operation(summary = "Retrieve all users", tags = {"Users"})
     @ApiResponses(value = {
@@ -54,6 +71,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
     }
 
+    /**
+     * Update a user by its id
+     *
+     * @param id        the id of the user to update
+     * @param userDtoIn the user to update
+     * @return the updated user
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a user by its id", tags = {"Users"})
     @ApiResponses(value = {
@@ -64,6 +88,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, userDtoIn));
     }
 
+    /**
+     * Delete a user by its id
+     *
+     * @param id the id of the user to delete
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user by its id", tags = {"Users"})
     @ApiResponses(value = {

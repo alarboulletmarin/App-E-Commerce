@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JwtConfig {
 
-    // Autowire the CustomUserDetailsService bean
     private final CustomUserDetailsService customUserDetailsService;
     // Read the values from application.yml file
     @Value("${spring.security.jwt.secret-key}")
@@ -21,6 +20,11 @@ public class JwtConfig {
     @Value("${spring.security.jwt.token-validity}")
     private long tokenValidity;
 
+    /**
+     * JwtConfig constructor
+     *
+     * @param customUserDetailsService CustomUserDetailsService
+     */
     public JwtConfig(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
     }

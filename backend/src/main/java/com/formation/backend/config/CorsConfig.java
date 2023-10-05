@@ -14,10 +14,10 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
+
     /**
-     * This method is used to configure the CORS
-     *
-     * @return CorsFilter object
+     * CORS configuration
+     * @return CorsFilter
      */
     @Bean
     public CorsFilter corsFilter() {

@@ -8,6 +8,11 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @Configuration
 public class RestConfig implements RepositoryRestConfigurer {
 
+    /**
+     * CORS configuration
+     * @param config RepositoryRestConfiguration
+     * @param cors CorsRegistry
+     */
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         cors.addMapping("/**")
