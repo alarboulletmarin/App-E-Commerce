@@ -1,9 +1,12 @@
 import {
   faCube,
   faGlobe,
+  faHeart,
   faHome,
   faMoon,
   faShieldAlt,
+  faShoppingCart,
+  faSignInAlt,
   faSun,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +22,9 @@ export const APP_CONSTANTS = {
     dark_theme: faMoon,
     light_theme: faSun,
     user: faUser,
+    shoppingCart: faShoppingCart,
+    heart: faHeart,
+    signOutAlt: faSignInAlt,
   },
   endpoints: {
     product: {
@@ -29,6 +35,14 @@ export const APP_CONSTANTS = {
       base: (id?: string) =>
         `${environment.apiURL}/api/categories${id ? `/${id}` : ''}`,
     },
+    auth: {
+      signin: {
+        base: () => `${environment.apiURL}/api/auth/signin`,
+      },
+      register: {
+        base: () => `${environment.apiURL}/api/auth/register`,
+      },
+    },
   },
   routerLinks: {
     home: '',
@@ -36,5 +50,8 @@ export const APP_CONSTANTS = {
     category: 'category',
     signin: 'signin',
     register: 'register',
+  },
+  headers: {
+    token: 'X-App-Session-Token',
   },
 };
