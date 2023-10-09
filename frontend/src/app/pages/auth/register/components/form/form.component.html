@@ -1,1 +1,98 @@
-<p>form works!</p>
+<div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1>{{ "label.register" | translate }}</h1>
+    <br />
+    <mat-progress-bar
+      mode="determinate"
+      [value]="(currentStep / 3) * 100"
+    ></mat-progress-bar>
+    <p>Étape {{ currentStep }} sur 3</p>
+    <br />
+
+    <div *ngIf="currentStep === 1" [formGroup]="step1Group">
+      <!-- Étape 1 : Fields for firstName, lastName, email, phone -->
+      <mat-form-field appearance="outline">
+        <mat-label>Prénom</mat-label>
+        <input matInput type="text" formControlName="firstName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" formControlName="lastName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Téléphone</mat-label>
+        <input matInput type="tel" formControlName="phone" required />
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="currentStep === 2" [formGroup]="step2Group">
+      <!-- Étape 2 : Fields for address, city, zipCode -->
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse</mat-label>
+        <input matInput type="text" formControlName="address" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ville</mat-label>
+        <input matInput type="text" formControlName="city" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Code Postal</mat-label>
+        <input matInput type="text" formControlName="zipCode" required />
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="currentStep === 3" [formGroup]="step3Group">
+      <!-- Étape 3 : Fields for username, password -->
+      <mat-form-field appearance="outline">
+        <mat-label> {{ "label.username" | translate }} </mat-label>
+        <input
+          matInput
+          placeholder="{{ 'label.placeholder_username' | translate }}"
+          type="text"
+          formControlName="username"
+          required
+        />
+        <mat-icon matSuffix>account_circle</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "label.password" | translate }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ 'label.placeholder_password' | translate }}"
+          type="password"
+          formControlName="password"
+          required
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button (click)="previousStep()" *ngIf="currentStep > 1">Précédent</button>
+    <button (click)="nextStep()" *ngIf="currentStep < 3">Suivant</button>
+
+    <p>
+      <button
+        type="submit"
+        mat-raised-button
+        [disabled]="!registerForm.valid"
+        *ngIf="currentStep === 3"
+      >
+        {{ "label.register" | translate }}
+      </button>
+    </p>
+  </form>
+</div>

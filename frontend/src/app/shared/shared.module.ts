@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const SHARED_MODULES = [
   CommonModule,
@@ -27,6 +28,7 @@ const SHARED_MODULES = [
   MatTooltipModule,
   MatMenuModule,
   FontAwesomeModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({
