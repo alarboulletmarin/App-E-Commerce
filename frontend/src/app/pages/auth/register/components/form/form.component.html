@@ -7,9 +7,8 @@
       [value]="(currentStep / 3) * 100"
     ></mat-progress-bar>
     <p>Étape {{ currentStep }} sur 3</p>
-    <br />
 
-    <div *ngIf="currentStep === 1" [formGroup]="step1Group">
+    <div class="step1" *ngIf="currentStep === 1" [formGroup]="step1Group">
       <!-- Étape 1 : Fields for firstName, lastName, email, phone -->
       <mat-form-field appearance="outline">
         <mat-label>Prénom</mat-label>
@@ -28,7 +27,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Téléphone</mat-label>
-        <input matInput type="tel" formControlName="phone" required />
+        <input matInput type="tel" formControlName="phone" />
       </mat-form-field>
     </div>
 
@@ -36,17 +35,17 @@
       <!-- Étape 2 : Fields for address, city, zipCode -->
       <mat-form-field appearance="outline">
         <mat-label>Adresse</mat-label>
-        <input matInput type="text" formControlName="address" required />
+        <input matInput type="text" formControlName="address" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Ville</mat-label>
-        <input matInput type="text" formControlName="city" required />
+        <input matInput type="text" formControlName="city" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Code Postal</mat-label>
-        <input matInput type="text" formControlName="zipCode" required />
+        <input matInput type="text" formControlName="zipCode" />
       </mat-form-field>
     </div>
 
@@ -81,8 +80,21 @@
       {{ errorMessage }}
     </div>
 
-    <button (click)="previousStep()" *ngIf="currentStep > 1">Précédent</button>
-    <button (click)="nextStep()" *ngIf="currentStep < 3">Suivant</button>
+    <div class="btns-next-prec">
+      <button type="button" (click)="previousStep()" *ngIf="currentStep > 1">
+        <mat-icon>arrow_back</mat-icon>
+        Précédent
+      </button>
+      <button
+        type="button"
+        (click)="nextStep()"
+        *ngIf="currentStep < 3"
+        [disabled]="getCurrentStepGroup()?.invalid"
+      >
+        Suivant
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
 
     <p>
       <button

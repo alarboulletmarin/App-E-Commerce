@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APP_CONSTANTS } from 'src/app/app.constant';
 import { UserRegister, UserSignin } from '../models/user.model';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -80,7 +80,23 @@ export class AuthService {
    * @returns An observable of the HTTP response.
    */
   public register(data: UserRegister): Observable<any> {
-    return this.httpClient.post(this.endpoint.register.base(), data).pipe();
+    return this.httpClient
+      .post(this.endpoint.register.base(), data)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // Une erreur côté client ou un problème réseau.
+      console.error('Erreur:', error.error.message);
+    } else {
+      // Le backend a renvoyé un code de réponse d'échec.
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
+    }
+    // Retourne un observable avec un message d'erreur pour l'utilisateur.
+    return throwError(error.error);
   }
 
   /**
