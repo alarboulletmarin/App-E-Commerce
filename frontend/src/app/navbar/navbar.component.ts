@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentToken.subscribe((token) => {
-      this.isConnected = token !== null;
+      this.isConnected = !!token;
     });
     this.productService.getProductList().subscribe((products) => {
       this.allProducts = products;

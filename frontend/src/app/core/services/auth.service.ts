@@ -19,9 +19,10 @@ export class AuthService {
    * @private
    * @type {BehaviorSubject<string | null>}
    */
-  private currentTokenSubject = new BehaviorSubject<string | null>(
-    JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '""')
-  );
+  private currentTokenSubject: BehaviorSubject<string | null> =
+    new BehaviorSubject<string | null>(
+      JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '""')
+    );
   /**
    * Observable that emits the current authentication token or null if not authenticated.
    * @type {Observable<string | null>}
@@ -52,7 +53,7 @@ export class AuthService {
    * Returns the current JWT token value.
    * @returns {string} The current JWT token value.
    */
-  public getJwtToken() {
+  public getJwtToken(): string | null {
     return this.currentTokenSubject.getValue();
   }
 
@@ -86,7 +87,7 @@ export class AuthService {
    * Clears the local storage, sets the current token subject to null and navigates to the home page.
    */
   public logout() {
-    localStorage.clear();
+    localStorage.removeItem(this.JWT_TOKEN);
     this.currentTokenSubject.next(null);
     this.router.navigate([APP_CONSTANTS.routerLinks.home]);
   }

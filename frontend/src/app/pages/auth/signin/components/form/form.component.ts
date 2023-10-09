@@ -33,15 +33,14 @@ export class FormComponent {
           this.isLoading = false;
           this.router.navigate(['/']);
         },
-        (error) => {
+        () => {
           this.isLoading = false;
-          console.log(error);
         }
       );
     } else {
       // Handle the invalid form
       this.errorMessage = 'Please enter a valid username and password';
-      this.signInForm.markAllAsTouched(); // This will trigger the error messages to show for all fields
+      this.signInForm.markAllAsTouched();
     }
   }
 }
