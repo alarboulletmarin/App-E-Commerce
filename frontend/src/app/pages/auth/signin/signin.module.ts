@@ -1,39 +1,23 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// === Import : NPM === //
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
+
+// === Import : LOCAL ~ Components === //
 import { SigninPageComponent } from './signin-page/signin-page.component';
 import { FormComponent } from './components/form/form.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+
+// === Import : LOCAL ~ Modules === //
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const homeRoutes: Routes = [{ path: '', component: SigninPageComponent }];
 
-const MODULES = [
-  CommonModule,
-  SharedModule,
-  RouterModule.forChild(homeRoutes),
-  MatFormFieldModule,
-  MatInputModule,
-  MatIconModule,
-  MatButtonModule,
-  MatDividerModule,
-  ReactiveFormsModule,
-  FormsModule,
-  TranslateModule,
-];
+const MODULES = [SharedModule, RouterModule.forChild(homeRoutes)];
 
-const COMPONENTS = [SigninPageComponent];
+const COMPONENTS = [SigninPageComponent, FormComponent];
 
 @NgModule({
-  declarations: [COMPONENTS, FormComponent],
+  declarations: [COMPONENTS],
   imports: [MODULES],
   exports: [RouterModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SigninModule {}

@@ -1,20 +1,23 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// === Import : NPM === //
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
+
+// === Import : LOCAL ~ Components === //
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { FormComponent } from './components/form/form.component';
 
+// === Import : LOCAL ~ Modules === //
+import { SharedModule } from 'src/app/shared/shared.module';
+
 const homeRoutes: Routes = [{ path: '', component: RegisterPageComponent }];
 
-const MODULES = [CommonModule, SharedModule, RouterModule.forChild(homeRoutes)];
+const MODULES = [SharedModule, RouterModule.forChild(homeRoutes)];
 
-const COMPONENTS = [RegisterPageComponent];
+const COMPONENTS = [RegisterPageComponent, FormComponent];
 
 @NgModule({
-  declarations: [COMPONENTS, FormComponent],
+  declarations: [COMPONENTS],
   imports: [MODULES],
   exports: [RouterModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RegisterModule {}

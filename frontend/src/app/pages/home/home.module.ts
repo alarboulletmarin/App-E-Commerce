@@ -1,17 +1,23 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// === Import : NPM === //
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+// === Import : LOCAL ~ Components === //
 import { HomePageComponent } from './home-page/home-page.component';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { APP_CONSTANTS } from 'src/app/app.constant';
-import { CarouselComponent } from './components/carousel/carousel.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+
+// === Import : LOCAL ~ Variables === //
+import { APP_CONSTANTS } from 'src/app/app.constant';
+
+// === Import : LOCAL ~ Modules === //
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const homeRoutes: Routes = [
   { path: APP_CONSTANTS.routerLinks.home, component: HomePageComponent },
 ];
 
-const MODULES = [CommonModule, SharedModule, RouterModule.forChild(homeRoutes)];
+const MODULES = [SharedModule, RouterModule.forChild(homeRoutes)];
 
 const COMPONENTS = [HomePageComponent];
 
@@ -19,6 +25,5 @@ const COMPONENTS = [HomePageComponent];
   declarations: [COMPONENTS, CarouselComponent, PlaceholderComponent],
   imports: [MODULES],
   exports: [RouterModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {}
