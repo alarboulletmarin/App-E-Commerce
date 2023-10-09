@@ -86,6 +86,8 @@
         justify-content: center
         color: var(--text-color)
       .icon-wrapper
+        #theme-icon
+          cursor: pointer
         .icon
           color: var(--text-color)
         .languages-list
@@ -109,22 +111,5 @@
               outline: none
               box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5)
       .nav-item-no-connected
-        width: 15em
-        color: var(--text-color)
-        div
-          display: flex
-          align-items: center
-          button
-            width: 10em
-            margin: 0.5em
-            border-radius: 0.5em
-            cursor: pointer
-            transition: background-color 0.3s
-            background: var(--quinary-color)
-            &:hover
-              background-color: var(--primary-color)
-            a
-              color: var(--primary-color)
-              text-decoration: none
-              &:hover
-                color: var(--quinary-color)
+        button
+          margin: 0 0.5em

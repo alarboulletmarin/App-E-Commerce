@@ -4,6 +4,7 @@ import { ProductShort } from '../core/models/product.model';
 import { TranslateService } from '@ngx-translate/core';
 import { APP_CONSTANTS } from '../app.constant';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,10 +23,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.currentToken.subscribe((token) => {
+      this.isConnected = token !== null;
+    });
     this.productService.getProductList().subscribe((products) => {
       this.allProducts = products;
     });
@@ -81,5 +86,10 @@ export class NavbarComponent implements OnInit {
       this.faIconTheme = this.faIcons.light_theme;
       localStorage.setItem('theme', 'dark-theme');
     }
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.isConnected = false;
   }
 }

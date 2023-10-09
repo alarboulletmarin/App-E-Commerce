@@ -126,18 +126,23 @@
       <ul class="navbar-nav ml-auto nav-right">
         <li class="nav-item">
           <div class="icon-wrapper">
-            <fa-icon
-              (click)="showLanguages = !showLanguages"
-              [icon]="faIcons.language"
-              class="icon"
-            ></fa-icon>
-            <div *ngIf="showLanguages" class="languages-list">
-              <div (click)="useLanguage(lang)" *ngFor="let lang of languages">
-                <button class="btn-lang">
-                  {{ "lang." + lang | translate }}
-                </button>
-              </div>
-            </div>
+            <button
+              mat-button
+              matTooltip="{{ 'label.change_language' | translate }}"
+              [matMenuTriggerFor]="languageMenu"
+            >
+              <fa-icon [icon]="faIcons.language" class="icon"></fa-icon>
+            </button>
+
+            <mat-menu #languageMenu="matMenu">
+              <button
+                *ngFor="let lang of languages"
+                mat-menu-item
+                (click)="useLanguage(lang)"
+              >
+                {{ "lang." + lang | translate }}
+              </button>
+            </mat-menu>
           </div>
         </li>
         <li class="nav-item">
@@ -147,6 +152,8 @@
               (click)="toggleTheme()"
               [icon]="faIconTheme"
               class="icon"
+              id="theme-icon"
+              matTooltip="{{ 'label.change_theme' | translate }}"
             ></fa-icon>
           </div>
         </li>
@@ -154,39 +161,44 @@
         <!-- Si non connecté -->
         <li class="nav-item-no-connected" *ngIf="!isConnected">
           <div>
-            <button>
-              <a class="nav-link" [routerLink]="['/signin']">{{
-                "label.signin" | translate
-              }}</a>
+            <button mat-raised-button [routerLink]="['/signin']">
+              {{ "label.signin" | translate }}
             </button>
-            <button>
-              <a class="nav-link" [routerLink]="['/register']">{{
-                "label.register" | translate
-              }}</a>
+            <button mat-raised-button [routerLink]="['/register']">
+              {{ "label.register" | translate }}
             </button>
           </div>
         </li>
+
         <!-- Si connecté -->
         <li class="nav-item-connected" *ngIf="isConnected">
           <div>
-            <button>
-              <a class="nav-link" [routerLink]="['/profile']">{{
-                "label.profile" | translate
-              }}</a>
+            <button
+              mat-button
+              [matMenuTriggerFor]="userMenu"
+              matTooltip="{{ 'label.profile' | translate }}"
+            >
+              <fa-icon [icon]="faIcons.user" class="icon"></fa-icon>
             </button>
-            <button>
-              <a class="nav-link" [routerLink]="['/cart']">{{
-                "label.cart" | translate
-              }}</a>
-            </button>
-            <button>
-              <a class="nav-link" [routerLink]="['/orders']">{{
-                "label.orders" | translate
-              }}</a>
-            </button>
-            <button>
-              <a class="nav-link">{{ "label.logout" | translate }}</a>
-            </button>
+
+            <mat-menu #userMenu="matMenu">
+              <button mat-menu-item [routerLink]="['/user']">
+                <fa-icon [icon]="faIcons.user" class="icon"></fa-icon>
+                {{ "label.my_account" | translate }}
+              </button>
+              <button mat-menu-item [routerLink]="['/cart']">
+                <fa-icon [icon]="faIcons.shoppingCart" class="icon"></fa-icon>
+                {{ "label.cart" | translate }}
+              </button>
+              <button mat-menu-item [routerLink]="['/favorites']">
+                <fa-icon [icon]="faIcons.heart" class="icon"></fa-icon>
+                {{ "label.favorites" | translate }}
+              </button>
+              <button mat-menu-item (click)="logout()">
+                <fa-icon [icon]="faIcons.signOutAlt" class="icon"></fa-icon>
+                {{ "label.logout" | translate }}
+              </button>
+            </mat-menu>
           </div>
         </li>
       </ul>
