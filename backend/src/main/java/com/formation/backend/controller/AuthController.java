@@ -65,7 +65,7 @@ public class AuthController {
      * @param request LoginRequest object
      * @return ResponseEntity object
      */
-    @PostMapping("/login")
+    @PostMapping("/signin")
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "User logged in"))
     public ResponseEntity<Void> login(@RequestBody LoginRequest request) {
         try {

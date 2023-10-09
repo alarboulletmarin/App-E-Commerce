@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors().and()
                 .authorizeRequests(requests -> requests
-                        .antMatchers("/api/auth/login", "/api/auth/register", "/api/auth/logout", "/v3/api-docs",
+                        .antMatchers("/api/auth/signin", "/api/auth/register", "/api/auth/logout", "/v3/api-docs",
                                 "/configuration/ui",
                                 "/swagger-resources/**",
                                 "/configuration/security",
