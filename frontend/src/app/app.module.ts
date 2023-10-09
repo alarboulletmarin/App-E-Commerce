@@ -8,7 +8,6 @@ import { PageNotFoundComponent } from './pages/pages-not-found/page-not-found.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './core/layout.module';
 
