@@ -19,7 +19,6 @@ public interface UserMapper {
 
     RoleDtoOut roleToRoleDtoOut(Role role);
 
-    @Mapping(target = "role", expression = "java(findRole(userDtoIn.getRoleId(), roleRepository))")
     User dtoInToEntity(UserDtoIn userDtoIn, @Context RoleRepository roleRepository);
 
     default Role findRole(Long roleId, RoleRepository roleRepository) {

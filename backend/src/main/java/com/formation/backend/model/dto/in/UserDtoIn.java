@@ -17,4 +17,17 @@ public class UserDtoIn {
 
     @NotNull(message = "Role ID cannot be null")
     private Long roleId;
+
+    @NotNull(message = "Email cannot be null")
+    private String email;
+
+    @NotNull(message = "First name cannot be null")
+    private String firstName;
+
+    @NotNull(message = "Last name cannot be null")
+    private String lastName;
+    private String address;
+    private String phone;
+    private String city;
+    private String zipCode;
 }

@@ -39,6 +39,13 @@ CREATE TABLE users
     role_id      INTEGER REFERENCES role (id),
     username     VARCHAR(255) UNIQUE NOT NULL,
     password     VARCHAR(255)        NOT NULL,
+    email        VARCHAR(255) UNIQUE NOT NULL,
+    first_name   VARCHAR(255)        NOT NULL,
+    last_name    VARCHAR(255)        NOT NULL,
+    phone        VARCHAR(255),
+    address      VARCHAR(255),
+    city         VARCHAR(255),
+    zip_code     VARCHAR(255),
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -53,7 +60,7 @@ VALUES ('Books', 'BOOKS');
 -- ADD CONSTANT DATA ROLE
 INSERT INTO role (name)
 VALUES ('ROLE_USER');
-INSERT INTO role (name) 
+INSERT INTO role (name)
 VALUES ('ROLE_ADMIN');
 
 
