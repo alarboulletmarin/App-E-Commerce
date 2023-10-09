@@ -19,6 +19,17 @@
     "search": "What are you looking for?",
     "signin": "Sign in",
     "register": "Register",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile": "Profile",
+    "my_account": "My Account",
+    "orders": "Orders",
+    "cart": "Cart",
+    "favorites": "Wishlist",
+    "change_language": "Change Language",
+    "change_theme": "Change Theme",
+    "username": "Username",
+    "password": "Password",
+    "placeholder_username": "Enter your username",
+    "placeholder_password": "Enter your password"
   }
 }

@@ -19,6 +19,17 @@
     "search": "Que recherchez vous ?",
     "signin": "Connexion",
     "register": "Inscription",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "my_account": "Mon Compte",
+    "orders": "Commandes",
+    "cart": "Panier",
+    "favorites": "Favoris",
+    "change_language": "Changer de langue",
+    "change_theme": "Changer de thème",
+    "username": "Identifiant",
+    "password": "Mot de passe",
+    "placeholder_username": "Entrez votre identifiant",
+    "placeholder_password": "Entrez votre mot de passe"
   }
 }
