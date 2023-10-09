@@ -1,0 +1,47 @@
+<div>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <h1>{{ "label.signin" | translate }}</h1>
+    <br />
+    <!-- Identifiant -->
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label> {{ "label.username" | translate }} </mat-label>
+        <input
+          matInput
+          placeholder="{{ 'label.placeholder_username' | translate }}"
+          type="text"
+          id="username"
+          formControlName="username"
+          required
+        />
+        <mat-icon matSuffix>account_circle</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <!-- Password -->
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "label.password" | translate }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ 'label.placeholder_password' | translate }}"
+          type="password"
+          id="password"
+          formControlName="password"
+          required
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <p>
+      <button type="submit" mat-raised-button [disabled]="!signInForm.valid">
+        {{ "label.signin" | translate }}
+      </button>
+    </p>
+  </form>
+</div>
