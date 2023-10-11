@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { APP_CONSTANTS } from './app.constant';
 import { PageNotFoundComponent } from './pages/pages-not-found/page-not-found.component';
+import { authGuard } from './core/security/auth.guard';
 
 const routes: Routes = [
   // HOME PAGE
@@ -46,6 +47,7 @@ const routes: Routes = [
   {
     path: APP_CONSTANTS.routerLinks.user,
     pathMatch: 'full',
+    canActivate: [authGuard],
     loadChildren: () =>
       import('./pages/user/user.module').then((m) => m.UserModule),
   },

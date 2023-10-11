@@ -107,4 +107,13 @@ export class AuthService {
     this.currentTokenSubject.next(null);
     this.router.navigate([APP_CONSTANTS.routerLinks.home]);
   }
+
+  public hasRoleUser(): boolean {
+    const token = this.getJwtToken();
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      return decodedToken.roles.includes('ROLE_USER');
+    }
+    return false;
+  }
 }
