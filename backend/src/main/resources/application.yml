@@ -25,7 +25,7 @@ spring:
   security:
     jwt:
       secret-key: H#hs{9Yi#@up8$#)9^68(c60_
-      token-validity: 86400000 # 1 day in milliseconds
+      token-validity: 5000 # 5 seconds
 
   mvc:
     pathmatch:

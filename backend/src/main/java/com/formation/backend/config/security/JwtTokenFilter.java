@@ -1,5 +1,6 @@
 package com.formation.backend.config.security;
 
+import com.formation.backend.exception.CustomJwtException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,8 +34,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
      * and validate the JWT token
      *
      * @param request     the incoming request
-     * @param response    the response
+     * @param response    the outgoing response
      * @param filterChain the filter chain
+     * @throws ServletException
+     * @throws IOException
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -43,12 +46,25 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = getTokenFromRequest(request);
 
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication auth = jwtTokenProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(auth);
+        try {
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication auth = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+            filterChain.doFilter(request, response);
+        } catch (CustomJwtException e) {
+            if ("TokenExpired".equals(e.getReason())) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("{\"reason\": \"TokenExpired\"}");
+            } else {
+                // handle other exceptions if needed
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.getWriter().write("{\"reason\": \"InvalidToken\"}");
+
+            }
         }
-        filterChain.doFilter(request, response);
     }
+
 
     /**
      * This method is used to get the JWT token from the request

@@ -1,10 +1,8 @@
 package com.formation.backend.config.security;
 
+import com.formation.backend.exception.CustomJwtException;
 import com.formation.backend.service.CustomUserDetailsService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -92,8 +90,10 @@ public class JwtTokenProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
+        } catch (ExpiredJwtException e) {
+            throw new CustomJwtException("TokenExpired", "The token has expired");
         } catch (JwtException | IllegalArgumentException e) {
-            return false;
+            throw new CustomJwtException("InvalidToken", "The token is invalid");
         }
     }
 }
