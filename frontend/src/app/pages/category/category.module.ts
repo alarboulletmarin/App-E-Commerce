@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +21,5 @@ const COMPONENTS = [CategoryPageComponent];
   declarations: [COMPONENTS],
   imports: [MODULES],
   exports: [RouterModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CategoryModule {}
