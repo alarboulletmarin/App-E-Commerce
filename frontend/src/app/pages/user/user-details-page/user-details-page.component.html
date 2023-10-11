@@ -2,7 +2,7 @@
   <div class="user-details-container">
     <!-- Section d'information personnelle -->
     <section class="user-section">
-      <h2>Informations personnelles</h2>
+      <h2>{{ "label.section_personal_infos" | translate }}</h2>
       <div class="info-row">
         <strong>Prénom : </strong>
         <span>{{ user.firstName }}</span>
@@ -23,7 +23,7 @@
 
     <!-- Section d'adresse -->
     <section class="user-section">
-      <h2>Adresse</h2>
+      <h2>{{ "label.section_address" | translate }}</h2>
       <div class="info-row">
         <span>{{ user.address }}, {{ user.zipCode }} {{ user.city }}</span>
       </div>
@@ -31,7 +31,7 @@
 
     <!-- Section d'autres détails -->
     <section class="user-section">
-      <h2>Autres détails</h2>
+      <h2>{{ "label.section_other_details" | translate }}</h2>
       <div class="info-row">
         <strong>Nom d'utilisateur : </strong>
         <span>{{ user.username }}</span>

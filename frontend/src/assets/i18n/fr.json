@@ -30,6 +30,9 @@
     "username": "Identifiant",
     "password": "Mot de passe",
     "placeholder_username": "Entrez votre identifiant",
-    "placeholder_password": "Entrez votre mot de passe"
+    "placeholder_password": "Entrez votre mot de passe",
+    "section_personal_infos": "Informations personnelles",
+    "section_address": "Adresse",
+    "section_other_details": "Autres détails"
   }
 }
