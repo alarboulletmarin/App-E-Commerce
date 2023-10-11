@@ -1,0 +1,49 @@
+<div *ngIf="user">
+  <div class="user-details-container">
+    <!-- Section d'information personnelle -->
+    <section class="user-section">
+      <h2>Informations personnelles</h2>
+      <div class="info-row">
+        <strong>Prénom : </strong>
+        <span>{{ user.firstName }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Nom : </strong>
+        <span>{{ user.lastName }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Email : </strong>
+        <span>{{ user.email }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Téléphone : </strong>
+        <span>{{ user.phone }}</span>
+      </div>
+    </section>
+
+    <!-- Section d'adresse -->
+    <section class="user-section">
+      <h2>Adresse</h2>
+      <div class="info-row">
+        <span>{{ user.address }}, {{ user.zipCode }} {{ user.city }}</span>
+      </div>
+    </section>
+
+    <!-- Section d'autres détails -->
+    <section class="user-section">
+      <h2>Autres détails</h2>
+      <div class="info-row">
+        <strong>Nom d'utilisateur : </strong>
+        <span>{{ user.username }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Date de création : </strong>
+        <span>{{ user.dateCreated }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Rôle : </strong>
+        <span>{{ user.role.name }}</span>
+      </div>
+    </section>
+  </div>
+</div>

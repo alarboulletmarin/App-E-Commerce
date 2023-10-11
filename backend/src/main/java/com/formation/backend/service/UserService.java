@@ -29,22 +29,27 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
     private final UserMapper userMapper;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    private final CustomUserDetailsService userDetailsService;
 
     /**
      * UserService constructor
      *
-     * @param passwordEncoder  PasswordEncoder bean
-     * @param userRepository   UserRepository bean
-     * @param roleRepository   RoleRepository bean
-     * @param jwtTokenProvider JwtTokenProvider bean
+     * @param passwordEncoder    PasswordEncoder bean
+     * @param userRepository     UserRepository bean
+     * @param roleRepository     RoleRepository bean
+     * @param jwtTokenProvider   JwtTokenProvider bean
+     * @param userDetailsService CustomUserDetailsService bean
      */
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, JwtTokenProvider jwtTokenProvider, UserMapper userMapper) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper, JwtTokenProvider jwtTokenProvider, CustomUserDetailsService userDetailsService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userMapper = userMapper;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     public UserDtoOut createUser(UserDtoIn userDtoIn) {
@@ -54,6 +59,20 @@ public class UserService {
         user.setRole(role);
         User createdUser = userRepository.save(user);
         return userMapper.entityToDtoOut(createdUser);
+    }
+
+    public UserDtoOut getCurrentUser(String token) {
+        // Supprimer le préfixe Bearer du token
+        token = token.replace("Bearer ", "");
+
+        // Récupérer le nom d'utilisateur du token
+        String username = jwtTokenProvider.getUsername(token);
+
+        // Récupérer l'utilisateur à partir de l'utilisateur détaillé
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException(TextNotFound));
+
+        // Convertir l'utilisateur en DTO
+        return userMapper.entityToDtoOut(user);
     }
 
     public UserDtoOut getUser(Long id) {

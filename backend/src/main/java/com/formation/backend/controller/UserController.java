@@ -42,6 +42,24 @@ public class UserController {
     }
 
     /**
+     * Retrieve the current user
+     *
+     * @param token the token of the current user
+     * @return the current user
+     */
+    //    @PreAuthorize("")
+    @GetMapping("/current")
+    @Operation(summary = "Retrieve the current user", tags = {"Users"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Current user", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = UserDtoOut.class))}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content)
+    })
+    public ResponseEntity<UserDtoOut> getCurrentUser(@RequestHeader("Authorization") String token) {
+        UserDtoOut userDto = userService.getCurrentUser(token);
+        return ResponseEntity.ok(userDto);
+    }
+
+    /**
      * Retrieve a user by its id
      *
      * @param id the id of the user to retrieve

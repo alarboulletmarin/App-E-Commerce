@@ -42,6 +42,13 @@ const routes: Routes = [
         (m) => m.RegisterModule
       ),
   },
+  //USER
+  {
+    path: APP_CONSTANTS.routerLinks.user,
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./pages/user/user.module').then((m) => m.UserModule),
+  },
   // ERROR PAGE
   { path: '**', component: PageNotFoundComponent },
 ];
