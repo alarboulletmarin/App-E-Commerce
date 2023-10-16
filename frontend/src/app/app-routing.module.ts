@@ -48,8 +48,18 @@ const routes: Routes = [
     path: APP_CONSTANTS.routerLinks.user,
     pathMatch: 'full',
     canActivate: [authGuard],
+    data: { expectedRole: 'ROLE_USER' },
     loadChildren: () =>
       import('./pages/user/user.module').then((m) => m.UserModule),
+  },
+  // ADMIN
+  {
+    path: APP_CONSTANTS.routerLinks.admin,
+    pathMatch: 'full',
+    canActivate: [authGuard],
+    data: { expectedRole: 'ROLE_ADMIN' },
+    loadChildren: () =>
+      import('./pages/admin/admin.module').then((m) => m.AdminModule),
   },
   // ERROR PAGE
   { path: '**', component: PageNotFoundComponent },
