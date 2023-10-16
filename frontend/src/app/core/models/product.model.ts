@@ -1,3 +1,4 @@
+// === Import : LOCAL
 import { Category } from './category.model';
 
 export class Product {

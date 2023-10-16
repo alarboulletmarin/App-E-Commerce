@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
-import { APP_CONSTANTS } from 'src/app/app.constant';
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
