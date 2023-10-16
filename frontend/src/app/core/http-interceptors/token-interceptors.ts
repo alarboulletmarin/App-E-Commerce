@@ -14,7 +14,7 @@ import { catchError, tap } from 'rxjs/operators';
 // === Import : LOCAL
 import { APP_CONSTANTS } from 'src/app/app.constant';
 import { AuthService } from '../services/auth.service';
-import { DialogService } from '../services/dialog.service';
+import { ToastService } from '../services/toast.service';
 
 // If no token, do next without setting headers
 // Else, TokenInterceptor intercepts all requests and set the new header with Bearer token.
@@ -23,10 +23,16 @@ import { DialogService } from '../services/dialog.service';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
-    private dialogService: DialogService
+    private toastService: ToastService
   ) {}
 
-  intercept(
+  /**
+   * Interceptor to add authorization token to outgoing HTTP requests and handle token expiration errors.
+   * @param req - The outgoing HTTP request.
+   * @param next - The next HTTP handler.
+   * @returns An observable of the HTTP response events.
+   */
+  public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
@@ -53,7 +59,7 @@ export class TokenInterceptor implements HttpInterceptor {
           const errorMsg: string = error.error.message || error.error.reason;
 
           if (errorMsg === 'TokenExpired') {
-            this.dialogService.openDialog(
+            this.toastService.showToast(
               'Votre session a expiré. Veuillez vous reconnecter.'
             );
             // If token is expired, logout the user

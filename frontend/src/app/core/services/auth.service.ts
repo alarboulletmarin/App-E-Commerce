@@ -1,15 +1,17 @@
+// === Import : NPM
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { APP_CONSTANTS } from 'src/app/app.constant';
-import { UserRegister, UserSignin } from '../models/user.model';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
+
+// === Import : LOCAL
+import { APP_CONSTANTS } from 'src/app/app.constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public endpoint = APP_CONSTANTS.endpoints.auth;
+  public endpoint = APP_CONSTANTS.endpoints.auth.base();
 
   // The key used to store the JWT token in the local storage.
   private readonly JWT_TOKEN = 'JWT_TOKEN';
@@ -70,8 +72,8 @@ export class AuthService {
    * @param data The user's sign in data.
    * @returns An observable of the HTTP response.
    */
-  public signin(data: UserSignin): Observable<any> {
-    return this.httpClient.post(this.endpoint.signin.base(), data).pipe();
+  public signin(data: any): Observable<any> {
+    return this.httpClient.post(`${this.endpoint}/signin`, data).pipe();
   }
 
   /**
@@ -79,9 +81,9 @@ export class AuthService {
    * @param data The user registration data.
    * @returns An observable of the HTTP response.
    */
-  public register(data: UserRegister): Observable<any> {
+  public register(data: any): Observable<any> {
     return this.httpClient
-      .post(this.endpoint.register.base(), data)
+      .post(`${this.endpoint}/register`, data)
       .pipe(catchError(this.handleError));
   }
 
@@ -100,19 +102,27 @@ export class AuthService {
   }
 
   /**
-   * Clears the local storage, sets the current token subject to null and navigates to the home page.
+   * Clears the local storage, sets the current token subject to null.
    */
   public logout() {
     localStorage.removeItem(this.JWT_TOKEN);
     this.currentTokenSubject.next(null);
-    this.router.navigate([APP_CONSTANTS.routerLinks.home]);
+    const currentUrl = this.router.routerState.snapshot.url;
+    if (currentUrl === '/user' || currentUrl === '/admin') {
+      this.router.navigate([APP_CONSTANTS.routerLinks.home]);
+    }
   }
 
-  public hasRoleUser(): boolean {
+  /**
+   * Checks if the user has a specific role by verifying the presence of a JWT token and the role in the decoded token.
+   * @param role - The role to check for.
+   * @returns {boolean} True if the user has the specified role, false otherwise.
+   */
+  public hasRole(role: string): boolean {
     const token = this.getJwtToken();
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      return decodedToken.roles.includes('ROLE_USER');
+      return decodedToken.roles.includes(role);
     }
     return false;
   }

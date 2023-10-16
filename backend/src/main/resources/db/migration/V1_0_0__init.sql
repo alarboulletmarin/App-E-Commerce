@@ -63,6 +63,11 @@ VALUES ('ROLE_USER');
 INSERT INTO role (name)
 VALUES ('ROLE_ADMIN');
 
+-- ADD DATA USER ADMIN
+INSERT INTO users (role_id, username, password, email, first_name, last_name)
+VALUES (2, 'admin', '$2a$10$/VdQuq0/nro7u78l.g6uH.vO/rqqv46Y2zc8N1CSoOvx35Xk8lcCS', 'admin@mail.com', 'Admin',
+        'Admin');
+
 
 -- ADD DEVELOPMENT DATA PRODUCT
 INSERT INTO product (category_id, code, name, description, unit_price, image_url, active, units_in_stock)

@@ -10,7 +10,7 @@ import {
   faSun,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import {environment} from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 export const APP_CONSTANTS = {
   colors: {},
@@ -36,6 +36,7 @@ export const APP_CONSTANTS = {
         `${environment.apiURL}/api/categories${id ? `/${id}` : ''}`,
     },
     auth: {
+      base: () => `${environment.apiURL}/api/auth`,
       signin: {
         base: () => `${environment.apiURL}/api/auth/signin`,
       },
@@ -54,6 +55,7 @@ export const APP_CONSTANTS = {
     signin: 'signin',
     register: 'register',
     user: 'user',
+    admin: 'admin',
   },
   headers: {
     token: 'X-App-Session-Token',

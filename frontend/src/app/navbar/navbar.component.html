@@ -171,7 +171,7 @@
         </li>
 
         <!-- Si connecté -->
-        <li class="nav-item-connected" *ngIf="isConnected">
+        <li class="nav-item-connected" *ngIf="isUser() && isConnected">
           <div>
             <button
               mat-button
@@ -194,6 +194,31 @@
                 <fa-icon [icon]="faIcons.heart" class="icon"></fa-icon>
                 {{ "label.favorites" | translate }}
               </button>
+              <button mat-menu-item (click)="logout()">
+                <fa-icon [icon]="faIcons.signOutAlt" class="icon"></fa-icon>
+                {{ "label.logout" | translate }}
+              </button>
+            </mat-menu>
+          </div>
+        </li>
+
+        <!-- Si connecté en tant qu'admin -->
+        <li class="nav-item-connected" *ngIf="isAdmin() && isConnected">
+          <div>
+            <button
+              mat-button
+              [matMenuTriggerFor]="adminMenu"
+              matTooltip="{{ 'label.admin' | translate }}"
+            >
+              <fa-icon [icon]="faIcons.admin" class="icon"></fa-icon>
+            </button>
+
+            <mat-menu #adminMenu="matMenu">
+              <button mat-menu-item [routerLink]="['/admin']">
+                <fa-icon [icon]="faIcons.user" class="icon"></fa-icon>
+                {{ "label.admin" | translate }}
+              </button>
+
               <button mat-menu-item (click)="logout()">
                 <fa-icon [icon]="faIcons.signOutAlt" class="icon"></fa-icon>
                 {{ "label.logout" | translate }}

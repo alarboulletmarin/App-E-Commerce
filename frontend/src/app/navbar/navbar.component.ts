@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   public showLanguages: boolean = false;
   public languages: string[] = ['fr', 'en'];
   public faIconTheme: IconDefinition = this.faIcons.dark_theme;
+  public userRole: string = '';
 
   constructor(
     private productService: ProductService,
@@ -30,7 +31,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.currentToken.subscribe((token) => {
       this.isConnected = !!token;
+      if (token) {
+        this.userRole = this.authService.hasRole('ROLE_ADMIN')
+          ? 'admin'
+          : 'user';
+      }
     });
+
     this.productService.getProductList().subscribe((products) => {
       this.allProducts = products;
     });
@@ -91,5 +98,13 @@ export class NavbarComponent implements OnInit {
   public logout(): void {
     this.authService.logout();
     this.isConnected = false;
+  }
+
+  public isAdmin(): boolean {
+    return this.userRole === 'admin';
+  }
+
+  public isUser(): boolean {
+    return this.userRole === 'user';
   }
 }
