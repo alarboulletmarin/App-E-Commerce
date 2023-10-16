@@ -85,3 +85,5 @@ e2e/*.map
 
 
 App E-Commerce.iml
+frontend/package.json
+frontend/package-lock.json
