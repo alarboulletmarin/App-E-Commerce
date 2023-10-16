@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './core/layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 // AoT requires an exported function for factories
 // from https://github.com/ngx-translate/core setup
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
