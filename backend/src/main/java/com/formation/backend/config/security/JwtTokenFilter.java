@@ -3,6 +3,7 @@ package com.formation.backend.config.security;
 import com.formation.backend.exception.CustomJwtException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /*
  * JwtTokenFilter class is used to intercept the incoming requests
@@ -32,12 +34,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     /**
      * This method is used to intercept the incoming requests
      * and validate the JWT token
-     *
-     * @param request     the incoming request
-     * @param response    the outgoing response
-     * @param filterChain the filter chain
-     * @throws ServletException
-     * @throws IOException
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -45,24 +41,41 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
         String token = getTokenFromRequest(request);
+        String requestURI = request.getRequestURI();
 
         try {
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
-            filterChain.doFilter(request, response);
         } catch (CustomJwtException e) {
             if ("TokenExpired".equals(e.getReason())) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("{\"reason\": \"TokenExpired\"}");
+                if (isPrivateRoute(requestURI)) {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("{\"reason\": \"TokenExpired\"}");
+                    return;
+                }
             } else {
-                // handle other exceptions if needed
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 response.getWriter().write("{\"reason\": \"InvalidToken\"}");
-
+                return;
             }
         }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private boolean isPrivateRoute(String uri) {
+        List<String> privateRoutes = List.of("/api/users/**", "/api/admin/**");
+
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        for (String route : privateRoutes) {
+            if (pathMatcher.match(route, uri)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
