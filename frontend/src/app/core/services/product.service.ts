@@ -12,6 +12,11 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Search for products based on a search term.
+   * @param params - The search term to use.
+   * @returns An observable that emits an HTTP response containing an array of ProductShort objects.
+   */
   public searchProduct(
     params: string
   ): Observable<HttpResponse<ProductShort[]>> {
@@ -27,6 +32,10 @@ export class ProductService {
       );
   }
 
+  /**
+   * Retrieves a list of products.
+   * @returns An observable of an array of ProductShort objects.
+   */
   public getProductList(): Observable<ProductShort[]> {
     return this.httpClient
       .get<ProductShort[]>(this.endpoint.base(), { observe: 'response' })

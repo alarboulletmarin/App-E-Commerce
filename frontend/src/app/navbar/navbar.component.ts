@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { APP_CONSTANTS } from '../app.constant';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../core/services/auth.service';
+import { NavbarService } from '../core/services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,10 +26,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private translateService: TranslateService,
-    private authService: AuthService
+    private authService: AuthService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
+    // Check if the user is connected and get his role
+    // to display the correct navbar
     this.authService.currentToken.subscribe((token) => {
       this.isConnected = !!token;
       if (token) {
@@ -38,29 +42,23 @@ export class NavbarComponent implements OnInit {
       }
     });
 
+    // Get the list of products to be used for the search bar
     this.productService.getProductList().subscribe((products) => {
       this.allProducts = products;
     });
-    const savedLanguage = localStorage.getItem('selectedLanguage');
-    if (savedLanguage) {
-      this.translateService.use(savedLanguage);
-    } else {
-      this.translateService.use(this.languages[0]);
-    }
 
-    const savedTheme = localStorage.getItem('theme');
+    // Set the language to be used by the application
+    const savedLanguage = this.navbarService.getCurrentLanguage();
+    this.translateService.use(savedLanguage);
+
+    // Set the theme to be used by the application
     const body = document.body;
-
-    if (savedTheme) {
-      body.classList.add(savedTheme);
-      if (savedTheme === 'dark-theme') {
-        this.faIconTheme = this.faIcons.light_theme;
-      } else {
-        this.faIconTheme = this.faIcons.dark_theme;
-      }
-    } else {
-      body.classList.add('dark-theme');
+    const savedTheme = this.navbarService.getCurrentTheme();
+    body.classList.add(savedTheme);
+    if (savedTheme === 'dark-theme') {
       this.faIconTheme = this.faIcons.light_theme;
+    } else {
+      this.faIconTheme = this.faIcons.dark_theme;
     }
   }
 
@@ -75,24 +73,12 @@ export class NavbarComponent implements OnInit {
   }
 
   public useLanguage(lang: string): void {
-    this.translateService.use(lang);
-    localStorage.setItem('selectedLanguage', lang);
+    this.navbarService.useLanguage(lang);
     this.showLanguages = false;
   }
 
   public toggleTheme() {
-    const body = document.body;
-    if (body.classList.contains('dark-theme')) {
-      body.classList.remove('dark-theme');
-      body.classList.add('light-theme');
-      this.faIconTheme = this.faIcons.dark_theme;
-      localStorage.setItem('theme', 'light-theme');
-    } else {
-      body.classList.remove('light-theme');
-      body.classList.add('dark-theme');
-      this.faIconTheme = this.faIcons.light_theme;
-      localStorage.setItem('theme', 'dark-theme');
-    }
+    this.faIconTheme = this.navbarService.toggleTheme();
   }
 
   public logout(): void {
