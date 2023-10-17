@@ -68,17 +68,10 @@ public class AuthController {
     @PostMapping("/signin")
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "User logged in"))
     public ResponseEntity<Void> login(@RequestBody LoginRequest request) {
-        try {
-            String token = authService.authenticate(request.getUsername(), request.getPassword());
-
-            HttpHeaders header = new HttpHeaders();
-            header.add("X-App-Session-Token", token);
-
-            return ResponseEntity.ok().headers(header).build();
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'authentification: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        String token = authService.authenticate(request.getUsername(), request.getPassword());
+        HttpHeaders header = new HttpHeaders();
+        header.add("X-App-Session-Token", token);
+        return ResponseEntity.ok().headers(header).build();
     }
 
     /**
@@ -90,9 +83,6 @@ public class AuthController {
     @PostMapping("/logout")
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "User logged out"))
     public ResponseEntity<Void> logout(HttpServletResponse response) {
-        // Utile ici car on utilise le header pour le token et donc lors du logout
-        // on surpprimera le localstorage
-        // On supprime le cookie JWT
         Cookie jwtCookie = cookieService.deleteJwtCookie();
         response.addCookie(jwtCookie);
         return ResponseEntity.ok().build();

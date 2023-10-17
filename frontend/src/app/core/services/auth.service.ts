@@ -1,6 +1,7 @@
 // === Import : NPM
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 
@@ -15,6 +16,12 @@ export class AuthService {
 
   // The key used to store the JWT token in the local storage.
   private readonly JWT_TOKEN = 'JWT_TOKEN';
+
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   /**
    * BehaviorSubject that holds the current token value retrieved from local storage.
@@ -31,8 +38,6 @@ export class AuthService {
    */
   public currentToken: Observable<string | null> =
     this.currentTokenSubject.asObservable();
-
-  constructor(private httpClient: HttpClient, private router: Router) {}
 
   /**
    * Returns the current token value from the currentTokenSubject.
@@ -73,7 +78,16 @@ export class AuthService {
    * @returns An observable of the HTTP response.
    */
   public signin(data: any): Observable<any> {
-    return this.httpClient.post(`${this.endpoint}/signin`, data).pipe();
+    return this.httpClient.post(`${this.endpoint}/signin`, data).pipe(
+      catchError((error) => {
+        this.snackBar.open('Identifiant ou mot de passe incorrect', 'Fermer', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        return throwError(error);
+      })
+    );
   }
 
   /**

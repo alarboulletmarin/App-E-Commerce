@@ -25,22 +25,16 @@ export class FormComponent {
   }
 
   onSubmit() {
-    if (this.signInForm.valid) {
-      // Handle the valid form
-      this.isLoading = true;
-      this.authService.signin(this.signInForm.value).subscribe(
-        () => {
-          this.isLoading = false;
-          this.router.navigate(['/']);
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
-    } else {
-      // Handle the invalid form
-      this.errorMessage = 'Please enter a valid username and password';
-      this.signInForm.markAllAsTouched();
-    }
+    // Handle the valid form
+    this.isLoading = true;
+    this.authService.signin(this.signInForm.value).subscribe(
+      () => {
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 }

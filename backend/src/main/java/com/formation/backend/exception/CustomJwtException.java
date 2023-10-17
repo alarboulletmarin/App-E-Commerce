@@ -1,5 +1,8 @@
 package com.formation.backend.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CustomJwtException extends RuntimeException {
     private final String reason;
 
@@ -8,7 +11,4 @@ public class CustomJwtException extends RuntimeException {
         this.reason = reason;
     }
 
-    public String getReason() {
-        return reason;
-    }
 }

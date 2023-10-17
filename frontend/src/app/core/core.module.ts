@@ -5,9 +5,10 @@ import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastService } from './services/toast.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, MatSnackBarModule],
   providers: [
     ProductService,
     CategoryService,
