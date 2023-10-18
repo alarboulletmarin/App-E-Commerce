@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +31,9 @@ public class CategoryController {
      */
     @PostMapping
     @Operation(summary = "Create a new category", tags = {"Categories"})
-    @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category created"))
+    @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Category created"))
     public ResponseEntity<CategoryDtoOut> createCategory(@Valid @RequestBody CategoryDtoOut categoryDtoOut) {
-        return ResponseEntity.ok(categoryService.createCategory(categoryDtoOut));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDtoOut));
     }
 
     /**
@@ -44,7 +45,7 @@ public class CategoryController {
     @Operation(summary = "Retrieve all categories", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "List of categories"))
     public ResponseEntity<List<CategoryDtoOut>> getCategories() {
-        return ResponseEntity.ok(categoryService.getCategories());
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategories());
     }
 
     /**
@@ -57,13 +58,13 @@ public class CategoryController {
     @Operation(summary = "Retrieve a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category found"))
     public ResponseEntity<CategoryDtoOut> getCategory(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.getCategory(id));
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategory(id));
     }
 
     /**
      * Update a category by its id
      *
-     * @param id Category id
+     * @param id             Category id
      * @param categoryDtoOut CategoryDtoOut object
      * @return ResponseEntity object
      */
@@ -71,7 +72,7 @@ public class CategoryController {
     @Operation(summary = "Update a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category updated"))
     public ResponseEntity<CategoryDtoOut> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDtoOut categoryDtoOut) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, categoryDtoOut));
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id, categoryDtoOut));
     }
 
     /**
@@ -85,6 +86,6 @@ public class CategoryController {
     @ApiResponses(value = @ApiResponse(responseCode = "204", description = "Category deleted"))
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
