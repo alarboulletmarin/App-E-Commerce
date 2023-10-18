@@ -3,6 +3,7 @@ package com.formation.backend.service;
 
 import com.formation.backend.dao.RoleRepository;
 import com.formation.backend.exception.NotFoundException;
+import com.formation.backend.model.dto.in.RoleDtoIn;
 import com.formation.backend.model.dto.mapper.RoleMapper;
 import com.formation.backend.model.dto.out.RoleDtoOut;
 import com.formation.backend.model.entity.Role;
@@ -47,17 +48,17 @@ public class RoleService {
         return roleMapper.entityToDtoOut(role);
     }
 
-    public RoleDtoOut createRole(RoleDtoOut roleDtoOut) {
-        Role role = roleMapper.dtoInToEntity(roleDtoOut);
-        Role savedRole = roleRepository.save(role);
-        return roleMapper.entityToDtoOut(savedRole);
+    public RoleDtoOut createRole(RoleDtoIn roleDtoIn) {
+        Role role = roleMapper.dtoInToEntity(roleDtoIn);
+        Role createdRole = roleRepository.save(role);
+        return roleMapper.entityToDtoOut(createdRole);
     }
 
-    public RoleDtoOut updateRole(Long id, RoleDtoOut roleDtoOut) {
+    public RoleDtoOut updateRole(Long id, RoleDtoIn roleDtoIn) {
         if (!roleRepository.existsById(id)) {
             throw new NotFoundException(TextNotFound);
         }
-        Role role = roleMapper.dtoInToEntity(roleDtoOut);
+        Role role = roleMapper.dtoInToEntity(roleDtoIn);
         role.setId(id);
         Role updatedRole = roleRepository.save(role);
         return roleMapper.entityToDtoOut(updatedRole);

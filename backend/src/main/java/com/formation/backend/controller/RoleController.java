@@ -1,8 +1,12 @@
 package com.formation.backend.controller;
 
+import com.formation.backend.model.dto.in.RoleDtoIn;
 import com.formation.backend.model.dto.out.RoleDtoOut;
 import com.formation.backend.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -15,8 +19,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/role")
-@Tag(name = "Role", description = "Operations on roles")
+@RequestMapping("/api/roles")
+@Tag(name = "Roles", description = "Operations on roles")
 public class RoleController {
     private final RoleService roleService;
 
@@ -27,14 +31,14 @@ public class RoleController {
     /**
      * Create a new role
      *
-     * @param roleDtoOut the role to create
+     * @param roleDtoIn the role to create
      * @return the created role
      */
     @PostMapping
-    @Operation(summary = "Create a new role", tags = {"Role"})
-    @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Role created"))
-    public ResponseEntity<RoleDtoOut> createRole(@Valid @RequestBody RoleDtoOut roleDtoOut) {
-        return ResponseEntity.ok(roleService.createRole(roleDtoOut));
+    @Operation(summary = "Create a new role", tags = {"Roles"})
+    @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Role created", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RoleDtoIn.class)))}))
+    public ResponseEntity<RoleDtoOut> createRole(@Valid @RequestBody RoleDtoIn roleDtoIn) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRole(roleDtoIn));
     }
 
     /**
@@ -43,7 +47,7 @@ public class RoleController {
      * @return the list of roles
      */
     @GetMapping
-    @Operation(summary = "Retrieve all roles", tags = {"Role"})
+    @Operation(summary = "Retrieve all roles", tags = {"Roles"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "List of roles"))
     public ResponseEntity<List<RoleDtoOut>> getRoles() {
         return ResponseEntity.ok(roleService.getRoles());
@@ -56,7 +60,7 @@ public class RoleController {
      * @return the role
      */
     @GetMapping("/{id}")
-    @Operation(summary = "Retrieve a role by its id", tags = {"Role"})
+    @Operation(summary = "Retrieve a role by its id", tags = {"Roles"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Role found"))
     public ResponseEntity<RoleDtoOut> getRole(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.getRole(id));
@@ -65,15 +69,15 @@ public class RoleController {
     /**
      * Update a role by its id
      *
-     * @param id         the id of the role to update
-     * @param roleDtoOut the role to update
+     * @param id        the id of the role to update
+     * @param roleDtoIn the role to update
      * @return the updated role
      */
     @PutMapping("/{id}")
-    @Operation(summary = "Update a role by its id", tags = {"Role"})
+    @Operation(summary = "Update a role by its id", tags = {"Roles"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Role updated"))
-    public ResponseEntity<RoleDtoOut> updateRole(@PathVariable Long id, @Valid @RequestBody RoleDtoOut roleDtoOut) {
-        return ResponseEntity.ok(roleService.updateRole(id, roleDtoOut));
+    public ResponseEntity<RoleDtoOut> updateRole(@PathVariable Long id, @Valid @RequestBody RoleDtoIn roleDtoIn) {
+        return ResponseEntity.ok(roleService.updateRole(id, roleDtoIn));
     }
 
     /**
@@ -83,7 +87,7 @@ public class RoleController {
      * @return nothing
      */
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a role by its id", tags = {"Role"})
+    @Operation(summary = "Delete a role by its id", tags = {"Roles"})
     @ApiResponses(value = @ApiResponse(responseCode = "204", description = "Role deleted"))
     public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
         roleService.deleteRole(id);

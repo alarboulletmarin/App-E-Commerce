@@ -1,5 +1,6 @@
 package com.formation.backend.model.dto.mapper;
 
+import com.formation.backend.model.dto.in.CategoryDtoIn;
 import com.formation.backend.model.dto.out.CategoryDtoOut;
 import com.formation.backend.model.entity.Category;
 import org.mapstruct.Mapper;
@@ -9,5 +10,5 @@ public interface CategoryMapper {
 
     CategoryDtoOut entityToDtoOut(Category category);
 
-    Category dtoInToEntity(CategoryDtoOut categoryDtoOut);
+    Category dtoInToEntity(CategoryDtoIn categoryDtoIn);
 }

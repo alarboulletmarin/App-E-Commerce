@@ -1,9 +1,12 @@
 package com.formation.backend.model.dto.out;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class RoleDtoOut {
+    
     private int id;
     private String name;
 }

@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.GET, "/api/products/**", "/api/categories/**").permitAll()
 
                         // Restrict access to the admin and user APIs
-                        .antMatchers("/api/admin/**").hasRole("ADMIN")
+                        .antMatchers("/api/admin/**", "/api/roles/**").hasRole("ADMIN")
                         .antMatchers("/api/users/**").hasRole("USER")
                         .antMatchers(HttpMethod.POST, "/api/products/**", "/api/categories/**").hasRole("ADMIN")
                         .antMatchers(HttpMethod.PUT, "/api/products/**", "/api/categories/**").hasRole("ADMIN")

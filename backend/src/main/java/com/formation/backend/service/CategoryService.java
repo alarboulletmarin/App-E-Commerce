@@ -2,6 +2,7 @@ package com.formation.backend.service;
 
 import com.formation.backend.dao.CategoryRepository;
 import com.formation.backend.exception.NotFoundException;
+import com.formation.backend.model.dto.in.CategoryDtoIn;
 import com.formation.backend.model.dto.mapper.CategoryMapper;
 import com.formation.backend.model.dto.out.CategoryDtoOut;
 import com.formation.backend.model.entity.Category;
@@ -38,17 +39,17 @@ public class CategoryService {
         return categoryMapper.entityToDtoOut(category);
     }
 
-    public CategoryDtoOut createCategory(CategoryDtoOut categoryDtoOut) {
-        Category category = categoryMapper.dtoInToEntity(categoryDtoOut);
+    public CategoryDtoOut createCategory(CategoryDtoIn categoryDtoIn) {
+        Category category = categoryMapper.dtoInToEntity(categoryDtoIn);
         Category savedCategory = categoryRepository.save(category);
         return categoryMapper.entityToDtoOut(savedCategory);
     }
 
-    public CategoryDtoOut updateCategory(Long id, CategoryDtoOut categoryDtoOut) {
+    public CategoryDtoOut updateCategory(Long id, CategoryDtoIn categoryDtoIn) {
         if (!categoryRepository.existsById(id)) {
             throw new NotFoundException(TextNotFound);
         }
-        Category category = categoryMapper.dtoInToEntity(categoryDtoOut);
+        Category category = categoryMapper.dtoInToEntity(categoryDtoIn);
         category.setId(id);
         Category updatedCategory = categoryRepository.save(category);
         return categoryMapper.entityToDtoOut(updatedCategory);

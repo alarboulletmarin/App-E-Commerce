@@ -1,5 +1,6 @@
 package com.formation.backend.controller;
 
+import com.formation.backend.model.dto.in.CategoryDtoIn;
 import com.formation.backend.model.dto.out.CategoryDtoOut;
 import com.formation.backend.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,14 +27,14 @@ public class CategoryController {
     /**
      * Create a new category
      *
-     * @param categoryDtoOut CategoryDtoOut object
+     * @param categoryDtoIn CategoryDtoOut object
      * @return ResponseEntity object
      */
     @PostMapping
     @Operation(summary = "Create a new category", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "201", description = "Category created"))
-    public ResponseEntity<CategoryDtoOut> createCategory(@Valid @RequestBody CategoryDtoOut categoryDtoOut) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDtoOut));
+    public ResponseEntity<CategoryDtoOut> createCategory(@Valid @RequestBody CategoryDtoIn categoryDtoIn) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDtoIn));
     }
 
     /**
@@ -64,15 +65,15 @@ public class CategoryController {
     /**
      * Update a category by its id
      *
-     * @param id             Category id
-     * @param categoryDtoOut CategoryDtoOut object
+     * @param id            Category id
+     * @param categoryDtoIn CategoryDtoOut object
      * @return ResponseEntity object
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update a category by its id", tags = {"Categories"})
     @ApiResponses(value = @ApiResponse(responseCode = "200", description = "Category updated"))
-    public ResponseEntity<CategoryDtoOut> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDtoOut categoryDtoOut) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id, categoryDtoOut));
+    public ResponseEntity<CategoryDtoOut> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDtoIn categoryDtoIn) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id, categoryDtoIn));
     }
 
     /**
