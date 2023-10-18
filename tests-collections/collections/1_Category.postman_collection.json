@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c67ae3f5-c255-4a20-a954-f95902998ce2",
-		"name": "1_Product",
+		"_postman_id": "0a9231a9-2f36-40bb-a8c7-2e0e4e7810b9",
+		"name": "1_Category",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23908553",
-		"_collection_link": "https://planetary-eclipse-693514.postman.co/workspace/Formation-Udemy~05fb7361-628d-4e39-862b-de6cadf3ef43/collection/23908553-c67ae3f5-c255-4a20-a954-f95902998ce2?action=share&source=collection_link&creator=23908553"
+		"_collection_link": "https://planetary-eclipse-693514.postman.co/workspace/Formation-Udemy~05fb7361-628d-4e39-862b-de6cadf3ef43/collection/23908553-0a9231a9-2f36-40bb-a8c7-2e0e4e7810b9?action=share&source=collection_link&creator=23908553"
 	},
 	"item": [
 		{
@@ -19,9 +19,9 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la création d'un Produit",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la création d'un Produit (Attendu: 403)\", function () {",
-									"    pm.response.to.have.status(403);",
+									"// Vérifie si le code de réponse HTTP est correct lors de la création d'une Categorie",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la création d'une Categorie (Attendu: 404)\", function () {",
+									"    pm.response.to.have.status(404);",
 									"});",
 									"",
 									"// Vérifie si le temps de réponse de l'API est inférieur à la limite définie",
@@ -37,14 +37,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"product_code\", \"P1234\");\r",
-									"pm.environment.set(\"product_name\", \"iPhone 5s\");\r",
-									"pm.environment.set(\"product_description\", \"Apple iPhone 5s smartphone with 4.00-inch 640x1136 display and 8-megapixel rear camera\");\r",
-									"pm.environment.set(\"product_unitPrice\", 500);\r",
-									"pm.environment.set(\"product_imageUrl\", \"assets/images/products/placeholder.png\");\r",
-									"pm.environment.set(\"product_active\", true);\r",
-									"pm.environment.set(\"product_unitsInStock\", 100);\r",
-									"pm.environment.set(\"product_categoryId\", 1);\r",
+									"pm.environment.set(\"category_code\", \"INFO\");\r",
+									"pm.environment.set(\"category_name\", \"Informatique\");\r",
 									""
 								],
 								"type": "text/javascript"
@@ -66,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"{{product_code}}\",\r\n    \"name\": \"{{product_name}}\",\r\n    \"description\": \"{{product_description}}\",\r\n    \"unitPrice\": {{product_unitPrice}},\r\n    \"imageUrl\": \"{{product_imageUrl}}\",\r\n    \"active\": {{product_active}},\r\n    \"unitsInStock\": {{product_unitsInStock}},\r\n    \"categoryId\": {{product_categoryId}}\r\n}\r\n",
+							"raw": "{\r\n    \"code\": \"{{category_code}}\",\r\n    \"name\": \"{{category_name}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,12 +68,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products",
+							"raw": "{{baseUrl}}/categories",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products"
+								"categories"
 							]
 						}
 					},
@@ -94,8 +88,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la recherche d'un Produit",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche d'un Produit (Attendu: 200)\", function () {",
+									"// Vérifie si le code de réponse HTTP est correct lors de la recherche d'une Categorie",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche d'une Categorie (Attendu: 200)\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -104,18 +98,13 @@
 									"",
 									"// Vérifie si les données renvoyées correspondent aux données envoyées",
 									"pm.test(\"Vérifie si les données renvoyées correspondent aux données envoyées\", function () {",
-									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"product_code\"));",
-									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"product_name\"));",
-									"    pm.expect(responseJson.description).to.equal(pm.variables.get(\"product_description\"));",
-									"    pm.expect(responseJson.unitPrice).to.equal(pm.variables.get(\"product_unitPrice\"));",
-									"    pm.expect(responseJson.active).to.equal(pm.variables.get(\"product_active\"));",
-									"    pm.expect(responseJson.unitsInStock).to.equal(pm.variables.get(\"product_unitsInStock\"));",
-									"    pm.expect(responseJson.category.id).to.equal(pm.variables.get(\"product_categoryId\"));",
+									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"category_code\"));",
+									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"category_name\"));",
 									"});",
 									"",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaProductDtoOut\", function () {",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOut\"));",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaCategoryDtoOut\", function () {",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));",
 									"    pm.expect(tv4.validate(responseJson, schema)).to.be.true;",
 									"});",
 									"",
@@ -123,6 +112,17 @@
 									"pm.test(`Vérifie si le temps de réponse de l'API est inférieur à ${RESPONSE_TIME_LIMIT} ms`, function () {",
 									"    pm.expect(pm.response.responseTime).to.be.below(RESPONSE_TIME_LIMIT);",
 									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"category_code\", \"ELECTRONICS\");\r",
+									"pm.environment.set(\"category_name\", \"Electronics\");\r",
 									""
 								],
 								"type": "text/javascript"
@@ -143,12 +143,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/1",
+							"raw": "{{baseUrl}}/categories/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
+								"categories",
 								"1"
 							]
 						}
@@ -164,8 +164,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la recherche de Produits",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche de Produits (Attendu: 200)\", function () {",
+									"// Vérifie si le code de réponse HTTP est correct lors de la recherche de Categories",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche de Categories (Attendu: 200)\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -173,11 +173,11 @@
 									"const responseJson = pm.response.json();",
 									"",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaProductDtoOutShort\", () => {",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaCategoryDtoOut\", () => {",
 									"    const responseData = pm.response.json();",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOutShort\"));",
-									"    responseData.forEach(function(product) {",
-									"        pm.expect(tv4.validate(product, schema)).to.be.true;",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));",
+									"    responseData.forEach(function(category) {",
+									"        pm.expect(tv4.validate(category, schema)).to.be.true;",
 									"    });",
 									"});",
 									"",
@@ -205,12 +205,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products",
+							"raw": "{{baseUrl}}/categories",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products"
+								"categories"
 							]
 						}
 					},
@@ -225,9 +225,9 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 200;\r",
 									"\r",
-									"// Vérifie si le code de réponse HTTP est correct lors de la modification d'un Produit\r",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la modification d'un Produit (Attendu: 403)\", function () {\r",
-									"    pm.response.to.have.status(403);\r",
+									"// Vérifie si le code de réponse HTTP est correct lors de la modification d'une Categorie\r",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la modification d'une Categorie (Attendu: 404)\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"// Vérifie si le temps de réponse de l'API est inférieur à la limite définie\r",
@@ -264,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"{{product_code}}\",\r\n    \"name\": \"{{product_name}}\",\r\n    \"description\": \"{{product_description}}\",\r\n    \"unitPrice\": {{product_unitPrice}},\r\n    \"imageUrl\": \"{{product_imageUrl}}\",\r\n    \"active\": {{product_active}},\r\n    \"unitsInStock\": {{product_unitsInStock}},\r\n    \"categoryId\": {{product_categoryId}}\r\n}\r\n",
+							"raw": "{\r\n    \"code\": \"{{category_code}}\",\r\n    \"name\": \"{{category_name}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -272,13 +272,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"raw": "{{baseUrl}}/categories/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"{{product_id}}"
+								"categories",
+								"1"
 							]
 						}
 					},
@@ -293,9 +293,9 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;\r",
 									"\r",
-									"// Vérifie si le code de réponse HTTP est correct lors de la suppression du Produit\r",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la suppression du Produit (Attendu : 403)\", function () {\r",
-									"    pm.response.to.have.status(403);\r",
+									"// Vérifie si le code de réponse HTTP est correct lors de la suppression de la Categorie\r",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la suppression de la Categorie (Attendu : 404)\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"// Vérifie si le temps de réponse de l'API est inférieur à la limite définie\r",
@@ -322,13 +322,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"raw": "{{baseUrl}}/categories/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"{{product_id}}"
+								"categories",
+								"1"
 							]
 						}
 					},
@@ -348,8 +348,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la création d'un Produit",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la création d'un Produit (Attendu: 201)\", function () {",
+									"// Vérifie si le code de réponse HTTP est correct lors de la création d'une Categorie",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la création d'une Categorie (Attendu: 201)\", function () {",
 									"    pm.response.to.have.status(201);",
 									"});",
 									"",
@@ -358,25 +358,20 @@
 									"",
 									"// Vérifie si l'ID est renvoyé et le stocke dans l'environnement",
 									"if (responseJson) {",
-									"    pm.environment.set(\"product_id\", responseJson.id);",
+									"    pm.environment.set(\"category_id\", responseJson.id);",
 									"}",
 									"",
 									"// Vérifie si les données renvoyées correspondent aux données envoyées",
 									"pm.test(\"Vérifie si les données renvoyées correspondent aux données envoyées\", function () {",
-									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"product_id\"));",
-									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"product_code\"));",
-									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"product_name\"));",
-									"    pm.expect(responseJson.description).to.equal(pm.variables.get(\"product_description\"));",
-									"    pm.expect(responseJson.unitPrice).to.equal(pm.variables.get(\"product_unitPrice\"));",
-									"    pm.expect(responseJson.active).to.equal(pm.variables.get(\"product_active\"));",
-									"    pm.expect(responseJson.unitsInStock).to.equal(pm.variables.get(\"product_unitsInStock\"));",
-									"    pm.expect(responseJson.category.id).to.equal(pm.variables.get(\"product_categoryId\"));",
+									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"category_id\"));",
+									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"category_code\"));",
+									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"category_name\"));",
 									"});",
 									"",
 									"",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la création de schemaProductDtoOut\", function () {",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOut\"));",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la création de schemaCategoryDtoOut\", function () {",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));",
 									"    pm.expect(tv4.validate(responseJson, schema)).to.be.true;",
 									"});",
 									"",
@@ -393,14 +388,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"product_code\", \"P12345\");\r",
-									"pm.environment.set(\"product_name\", \"Example Product\");\r",
-									"pm.environment.set(\"product_description\", \"This is an example product.\");\r",
-									"pm.environment.set(\"product_unitPrice\", 19.99);\r",
-									"pm.environment.set(\"product_imageUrl\", \"assets/images/products/placeholder.png\");\r",
-									"pm.environment.set(\"product_active\", true);\r",
-									"pm.environment.set(\"product_unitsInStock\", 100);\r",
-									"pm.environment.set(\"product_categoryId\", 1);\r",
+									"pm.environment.set(\"category_code\", \"INFO\");\r",
+									"pm.environment.set(\"category_name\", \"Informatique\");\r",
 									""
 								],
 								"type": "text/javascript"
@@ -422,7 +411,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"{{product_code}}\",\r\n    \"name\": \"{{product_name}}\",\r\n    \"description\": \"{{product_description}}\",\r\n    \"unitPrice\": {{product_unitPrice}},\r\n    \"imageUrl\": \"{{product_imageUrl}}\",\r\n    \"active\": {{product_active}},\r\n    \"unitsInStock\": {{product_unitsInStock}},\r\n    \"categoryId\": {{product_categoryId}}\r\n}\r\n",
+							"raw": "{\r\n    \"code\": \"{{category_code}}\",\r\n    \"name\": \"{{category_name}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -430,12 +419,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products",
+							"raw": "{{baseUrl}}/categories",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products"
+								"categories"
 							]
 						}
 					},
@@ -450,8 +439,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la recherche d'un Produit",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche d'un Produit (Attendu: 200)\", function () {",
+									"// Vérifie si le code de réponse HTTP est correct lors de la recherche d'une Categorie",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche d'une Categorie (Attendu: 200)\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -460,19 +449,14 @@
 									"",
 									"// Vérifie si les données renvoyées correspondent aux données envoyées",
 									"pm.test(\"Vérifie si les données renvoyées correspondent aux données envoyées\", function () {",
-									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"product_id\"));",
-									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"product_code\"));",
-									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"product_name\"));",
-									"    pm.expect(responseJson.description).to.equal(pm.variables.get(\"product_description\"));",
-									"    pm.expect(responseJson.unitPrice).to.equal(pm.variables.get(\"product_unitPrice\"));",
-									"    pm.expect(responseJson.active).to.equal(pm.variables.get(\"product_active\"));",
-									"    pm.expect(responseJson.unitsInStock).to.equal(pm.variables.get(\"product_unitsInStock\"));",
-									"    pm.expect(responseJson.category.id).to.equal(pm.variables.get(\"product_categoryId\"));",
+									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"category_id\"));",
+									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"category_code\"));",
+									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"category_name\"));",
 									"});",
 									"",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaProductDtoOut\", function () {",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOut\"));",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaCategoryDtoOut\", function () {",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));",
 									"    pm.expect(tv4.validate(responseJson, schema)).to.be.true;",
 									"});",
 									"",
@@ -500,13 +484,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"raw": "{{baseUrl}}/categories/{{category_id}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"{{product_id}}"
+								"categories",
+								"{{category_id}}"
 							]
 						}
 					},
@@ -521,8 +505,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;",
 									"",
-									"// Vérifie si le code de réponse HTTP est correct lors de la recherche de Produits",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche de Produits (Attendu: 200)\", function () {",
+									"// Vérifie si le code de réponse HTTP est correct lors de la recherche de Categories",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la recherche de Categories (Attendu: 200)\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -530,11 +514,11 @@
 									"const responseJson = pm.response.json();",
 									"",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaProductDtoOutShort\", () => {",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la recherche de schemaCategoryDtoOut\", () => {",
 									"    const responseData = pm.response.json();",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOutShort\"));",
-									"    responseData.forEach(function(product) {",
-									"        pm.expect(tv4.validate(product, schema)).to.be.true;",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));",
+									"    responseData.forEach(function(category) {",
+									"        pm.expect(tv4.validate(category, schema)).to.be.true;",
 									"    });",
 									"});",
 									"",
@@ -562,12 +546,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products",
+							"raw": "{{baseUrl}}/categories",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products"
+								"categories"
 							]
 						}
 					},
@@ -582,8 +566,8 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 200;\r",
 									"\r",
-									"// Vérifie si le code de réponse HTTP est correct lors de la modification d'un Produit\r",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la modification d'un Produit (Attendu: 200)\", function () {\r",
+									"// Vérifie si le code de réponse HTTP est correct lors de la modification d'une Categorie\r",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la modification d'une Categorie (Attendu: 200)\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -592,19 +576,14 @@
 									"\r",
 									"// Vérifie si les données renvoyées correspondent aux données envoyées\r",
 									"pm.test(\"Vérifie si les données renvoyées correspondent aux données envoyées\", function () {\r",
-									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"product_id\"));\r",
-									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"product_code\"));\r",
-									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"product_name\"));\r",
-									"    pm.expect(responseJson.description).to.equal(pm.variables.get(\"product_description\"));\r",
-									"    pm.expect(responseJson.unitPrice).to.equal(pm.variables.get(\"product_unitPrice\"));\r",
-									"    pm.expect(responseJson.active).to.equal(pm.variables.get(\"product_active\"));\r",
-									"    pm.expect(responseJson.unitsInStock).to.equal(pm.variables.get(\"product_unitsInStock\"));\r",
-									"    pm.expect(responseJson.category.id).to.equal(pm.variables.get(\"product_categoryId\"));\r",
+									"    pm.expect(responseJson.id).to.equal(pm.variables.get(\"category_id\"));\r",
+									"    pm.expect(responseJson.code).to.equal(pm.variables.get(\"category_code\"));\r",
+									"    pm.expect(responseJson.name).to.equal(pm.variables.get(\"category_name\"));\r",
 									"});\r",
 									"\r",
 									"// Vérifie si la réponse JSON du back-end est valide selon le schéma\r",
-									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la modification de schemaProductDtoOut\", function () {\r",
-									"    const schema = JSON.parse(pm.environment.get(\"schemaProductDtoOut\"));\r",
+									"pm.test(\"Vérifie si la réponse JSON du back-end est valide pour la modification de schemaCategoryDtoOut\", function () {\r",
+									"    const schema = JSON.parse(pm.environment.get(\"schemaCategoryDtoOut\"));\r",
 									"    pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
 									"});\r",
 									"\r",
@@ -620,13 +599,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"product_name\", \"Example Product Update\");\r",
-									"pm.environment.set(\"product_description\", \"This is an example product. Update\");\r",
-									"pm.environment.set(\"product_unitPrice\", 14.99);\r",
-									"pm.environment.set(\"product_imageUrl\", \"assets/images/products/placeholder.png\");\r",
-									"pm.environment.set(\"product_active\", true);\r",
-									"pm.environment.set(\"product_unitsInStock\", 99);\r",
-									"pm.environment.set(\"product_categoryId\", 1);\r",
+									"pm.environment.set(\"category_code\", \"INFO_MAJ\");\r",
+									"pm.environment.set(\"category_name\", \"Informatique_MAJ\");\r",
 									""
 								],
 								"type": "text/javascript"
@@ -648,7 +622,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"{{product_code}}\",\r\n    \"name\": \"{{product_name}}\",\r\n    \"description\": \"{{product_description}}\",\r\n    \"unitPrice\": {{product_unitPrice}},\r\n    \"imageUrl\": \"{{product_imageUrl}}\",\r\n    \"active\": {{product_active}},\r\n    \"unitsInStock\": {{product_unitsInStock}},\r\n    \"categoryId\": {{product_categoryId}}\r\n}\r\n",
+							"raw": "{\r\n    \"code\": \"{{category_code}}\",\r\n    \"name\": \"{{category_name}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -656,13 +630,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"raw": "{{baseUrl}}/categories/{{category_id}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"{{product_id}}"
+								"categories",
+								"{{category_id}}"
 							]
 						}
 					},
@@ -677,35 +651,29 @@
 								"exec": [
 									"const RESPONSE_TIME_LIMIT = 100;\r",
 									"\r",
-									"// Vérifie si le code de réponse HTTP est correct lors de la suppression du Produit\r",
-									"pm.test(\"Vérifie le code de réponse HTTP lors de la suppression du Produit (Attendu : 204)\", function () {\r",
+									"// Vérifie si le code de réponse HTTP est correct lors de la suppression de la Categorie\r",
+									"pm.test(\"Vérifie le code de réponse HTTP lors de la suppression de la Categorie (Attendu : 204)\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
 									"});\r",
 									"\r",
-									"// Après la suppression du Produit, les variables d'environnement correspondantes ne sont plus nécessaires.\r",
+									"// Après la suppression de la Categorie, les variables d'environnement correspondantes ne sont plus nécessaires.\r",
 									"// Par conséquent, nous les supprimons pour garder notre environnement propre.\r",
 									"\r",
 									"// Liste des variables à supprimer\r",
 									"const varsToUnset = [\r",
-									"    \"product_id\", \r",
-									"    \"product_code\",\r",
-									"    \"product_name\",\r",
-									"    \"product_description\",\r",
-									"    \"product_unitPrice\",\r",
-									"    \"product_imageUrl\",\r",
-									"    \"product_active\",\r",
-									"    \"product_unitsInStock\", \r",
-									"    \"product_categoryId\", \r",
+									"    \"category_id\",\r",
+									"    \"category_code\",\r",
+									"    \"category_name\",\r",
 									"];\r",
 									"\r",
-									"pm.test(\"Vérifie la suppression des variables d'environnement\" , function () {\r",
+									"pm.test(\"Vérifie la suppression des variables d'environnement\", function () {\r",
 									"\r",
-									"// Parcourir la liste des variables à supprimer\r",
-									"varsToUnset.forEach(varName => {\r",
-									"    // Supprimer la variable de l'environnement\r",
-									"    pm.environment.unset(varName);\r",
+									"    // Parcourir la liste des variables à supprimer\r",
+									"    varsToUnset.forEach(varName => {\r",
+									"        // Supprimer la variable de l'environnement\r",
+									"        pm.environment.unset(varName);\r",
 									"\r",
-									"    // Vérifier que la variable a été supprimée\r",
+									"        // Vérifier que la variable a été supprimée\r",
 									"        pm.expect(pm.environment.has(varName)).to.be.false;\r",
 									"    });\r",
 									"});\r",
@@ -734,13 +702,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/{{product_id}}",
+							"raw": "{{baseUrl}}/categories/{{category_id}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"{{product_id}}"
+								"categories",
+								"{{category_id}}"
 							]
 						}
 					},
@@ -800,63 +768,18 @@
 					"    }",
 					");",
 					"",
-					"// Schema for ProductDtoOut",
-					"",
-					"const schemaProductDtoOut = {",
+					"// Schema for CategoryDtoOut",
+					"const schemaCategoryDtoOut = {",
 					"    type: \"object\",",
 					"    properties: {",
 					"        id: { type: \"number\", minimum: 0 },",
 					"        code: { type: \"string\", minLength: 1 },",
 					"        name: { type: \"string\", minLength: 1 },",
-					"        description: { type: \"string\" },",
-					"        unitPrice: { type: \"number\" },",
-					"        imageUrl: { type: \"string\" },",
-					"        active: { type: \"boolean\" },",
-					"        unitsInStock: { type: \"integer\" },",
-					"        dateCreated: { type: \"string\" },",
-					"        lastUpdated: { type: \"string\" },",
-					"        category: {",
-					"            type: \"object\",",
-					"            properties: {",
-					"                id: { type: \"integer\" },",
-					"                code: { type: \"string\" },",
-					"                name: { type: \"string\" }",
-					"            },",
-					"            required: [\"id\", \"code\", \"name\"]",
-					"        }",
 					"    },",
-					"    required: [\"id\", \"code\", \"name\", \"description\", \"unitPrice\", \"imageUrl\", \"active\", \"unitsInStock\", \"dateCreated\", \"lastUpdated\", \"category\"]",
+					"    required: [\"id\", \"code\", \"name\"],",
 					"};",
 					"",
-					"pm.environment.set(\"schemaProductDtoOut\", JSON.stringify(schemaProductDtoOut));",
-					"",
-					"// Schema for ProductDtoOutShort",
-					"const schemaProductDtoOutShort = {",
-					"    type: \"object\",",
-					"    properties: {",
-					"        id: { type: \"number\" },",
-					"        code: { type: \"string\" },",
-					"        name: { type: \"string\" },",
-					"        description: { type: \"string\" },",
-					"        unitPrice: { type: \"number\" },",
-					"        imageUrl: { type: \"string\" },",
-					"        category: {",
-					"            type: \"object\",",
-					"            properties: {",
-					"                id: { type: \"number\" },",
-					"                code: { type: \"string\" },",
-					"                name: { type: \"string\" }",
-					"            },",
-					"            required: [\"id\", \"code\", \"name\"]",
-					"        }",
-					"    },",
-					"    required: [\"id\", \"code\", \"name\", \"description\", \"unitPrice\", \"imageUrl\", \"category\"]",
-					"};",
-					"pm.environment.set(\"schemaProductDtoOutShort\", JSON.stringify(schemaProductDtoOutShort));",
-					"",
-					"// Schema for ProductDtoIn",
-					"const schemaProductDtoIn = {}",
-					"pm.environment.set(\"schemaProductDtoIn\", JSON.stringify());",
+					"pm.environment.set(\"schemaCategoryDtoOut\", JSON.stringify(schemaCategoryDtoOut));",
 					""
 				]
 			}
