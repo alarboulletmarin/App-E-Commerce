@@ -51,12 +51,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (CustomJwtException e) {
             if ("TokenExpired".equals(e.getReason())) {
                 if (isPrivateRoute(requestURI)) {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     response.getWriter().write("{\"reason\": \"TokenExpired\"}");
                     return;
                 }
             } else {
-                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"reason\": \"InvalidToken\"}");
                 return;
             }
