@@ -1,26 +1,24 @@
 package com.formation.backend.config;
 
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springdoc.core.SwaggerUiConfigProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
 
-    /**
-     * Swagger configuration
-     * @return Docket
-     */
+    // @Autowired
+    // public void configureSwaggerUi(SwaggerUiConfigProperties swaggerUi) {
+    //     swaggerUi.setUrl("/api-docs");
+    // }
+
+
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
-                .select()
-                .apis(RequestHandlerSelectors.withMethodAnnotation(Operation.class))
-                .paths(PathSelectors.ant("/api/**"))
-                .build();
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("My API").version("1.0").description("My Custom API"));
     }
 }
